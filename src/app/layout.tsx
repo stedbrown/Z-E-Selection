@@ -10,16 +10,18 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Z&E Selection | Mercatino dell'usato & Antichità",
-  description: "Galleria d'antiquariato e mercatino dell'usato. Scopri pezzi unici e vintage.",
+  title: "Z&E Selection | Antiquariato & Usato di Qualità",
+  description: "Galleria d'antiquariato e mercatino dell'usato. Scopri pezzi unici e vintage selezionati con cura da Zuhad & Ema.",
 };
 
 export default async function RootLayout({
@@ -32,29 +34,34 @@ export default async function RootLayout({
   const t = getDictionary(lang).site;
 
   return (
-    <html lang="it" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
-        <header className="py-3 border-b border-cream-dark/20 sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-md">
-          <div className="container mx-auto px-4 flex justify-between items-center">
-            <Link href="/" aria-label="Z&E Selection — Home">
-              <Logo className="h-12 md:h-14 w-auto" />
+        {/* ── Header ── */}
+        <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-gray-100">
+          <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <Link href="/" aria-label="Z&E Selection — Home" className="hover:opacity-75 transition-opacity">
+              <Logo className="text-2xl sm:text-3xl" />
             </Link>
-            <nav>
+            <nav className="flex items-center gap-4">
               <LanguageSwitcher currentLang={lang} />
             </nav>
           </div>
         </header>
 
-        <main className="flex-1">
+        {/* ── Main ── */}
+        <main className="flex-1 animate-fade-in">
           {children}
         </main>
 
-        <footer className="py-8 mt-12 border-t border-cream-dark/20 text-center text-sm text-gray-500">
-          <Logo className="h-8 w-auto mx-auto mb-3 opacity-60" />
-          <p>&copy; {new Date().getFullYear()} Z&amp;E Selection. {t.footer}</p>
+        {/* ── Footer ── */}
+        <footer className="mt-20 border-t border-gray-100 bg-white/60">
+          <div className="container mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+            <Logo className="text-base" />
+            <p>&copy; {new Date().getFullYear()} Z&amp;E Selection. {t.footer}</p>
+          </div>
         </footer>
       </body>
     </html>
