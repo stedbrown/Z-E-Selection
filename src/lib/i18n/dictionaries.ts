@@ -20,7 +20,9 @@ export const dictionaries: Record<string, any> = {
             contact: "Contattaci per info",
             whatsapp: "Contatta su WhatsApp",
             soldOutMessage: "Articolo Venduto",
-            back: "Torna alla Home"
+            back: "Torna alla Home",
+            share: "Condividi",
+            copied: "Copiato!"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -99,7 +101,9 @@ export const dictionaries: Record<string, any> = {
             contact: "Contact us for info",
             whatsapp: "Contact on WhatsApp",
             soldOutMessage: "Item Sold",
-            back: "Back to Home"
+            back: "Back to Home",
+            share: "Share",
+            copied: "Copied!"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -178,7 +182,9 @@ export const dictionaries: Record<string, any> = {
             contact: "Contactez-nous pour info",
             whatsapp: "Contacter sur WhatsApp",
             soldOutMessage: "Article Vendu",
-            back: "Retour à l'accueil"
+            back: "Retour à l'accueil",
+            share: "Partager",
+            copied: "Copié !"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -257,7 +263,9 @@ export const dictionaries: Record<string, any> = {
             contact: "Kontaktieren Sie uns",
             whatsapp: "Auf WhatsApp kontaktieren",
             soldOutMessage: "Artikel Verkauft",
-            back: "Zurück zur Startseite"
+            back: "Zurück zur Startseite",
+            share: "Teilen",
+            copied: "Kopiert!"
         },
         adminMenu: {
             title: "Z&E Selection Admin",

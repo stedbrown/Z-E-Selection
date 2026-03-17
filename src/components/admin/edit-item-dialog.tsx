@@ -9,7 +9,7 @@ import { CloudinaryMultiUpload } from './cloudinary-multi-upload';
 import { Item, Category } from '@/types/item';
 import { useAdminDict } from '@/components/admin/admin-dict-context';
 
-export function EditItemDialog({ item, onClose }: { item: Item, onClose: () => void }) {
+export function EditItemDialog({ item, categories, onClose }: { item: Item, categories: { id: string, name: string }[], onClose: () => void }) {
     const router = useRouter();
     const { adminForm: t } = useAdminDict();
     const [loading, setLoading] = useState(false);
@@ -95,16 +95,29 @@ export function EditItemDialog({ item, onClose }: { item: Item, onClose: () => v
 
                         <div className="grid gap-2">
                             <label className="text-sm font-medium text-gray-700">{t.category}</label>
-                            <div className="flex flex-wrap gap-2 mb-2">
-                                <button type="button" onClick={() => setCategory('antiquariato' as Category)} className={`px-4 py-2 rounded-full text-sm transition-colors ${category === 'antiquariato' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`}>Antiquariato</button>
-                                <button type="button" onClick={() => setCategory('usato' as Category)} className={`px-4 py-2 rounded-full text-sm transition-colors ${category === 'usato' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`}>Usato</button>
-                                <button type="button" onClick={() => setCategory('oggettistica' as Category)} className={`px-4 py-2 rounded-full text-sm transition-colors ${category === 'oggettistica' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`}>Oggettistica</button>
-                                <button type="button" onClick={() => setCategory('altro' as Category)} className={`px-4 py-2 rounded-full text-sm transition-colors ${!['antiquariato','usato','oggettistica'].includes(category) ? 'bg-gray-900 text-white' : 'bg-gray-100'}`}>
-                                    {t.otherCategory}
-                                </button>
-                            </div>
-                            {!['antiquariato','usato','oggettistica'].includes(category) && (
-                                <Input value={category === 'altro' ? '' : category} onChange={(e) => setCategory(e.target.value)} placeholder={t.customCategoryPlaceholder} required />
+                            <select
+                                value={categories.find(c => c.name === category) ? category : (category !== '' ? 'altro' : '')}
+                                onChange={(e) => setCategory(e.target.value as Category)}
+                                className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                required
+                            >
+                                <option value="" disabled>Seleziona una categoria</option>
+                                {categories.map((cat) => (
+                                    <option key={cat.id} value={cat.name} className="capitalize">
+                                        {cat.name}
+                                    </option>
+                                ))}
+                                <option value="altro">{t.otherCategory}</option>
+                            </select>
+                            
+                            {!categories.find(c => c.name === category) && category !== '' && (
+                                <Input 
+                                    className="mt-2"
+                                    value={category === 'altro' ? '' : category} 
+                                    onChange={(e) => setCategory(e.target.value)} 
+                                    placeholder={t.customCategoryPlaceholder} 
+                                    required 
+                                />
                             )}
                         </div>
                     </div>

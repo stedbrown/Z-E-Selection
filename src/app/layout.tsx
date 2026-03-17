@@ -36,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
+        className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen overflow-x-hidden`}
         suppressHydrationWarning
       >
         {/* ── Header ── */}

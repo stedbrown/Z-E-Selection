@@ -9,7 +9,7 @@ import { EditItemDialog } from './edit-item-dialog';
 import { ItemHistoryDialog } from './item-history-dialog';
 import { useAdminDict } from '@/components/admin/admin-dict-context';
 
-export function AdminItemsList({ initialItems }: { initialItems: Item[] }) {
+export function AdminItemsList({ initialItems, categories }: { initialItems: Item[], categories: { id: string, name: string }[] }) {
     const [items, setItems] = useState<Item[]>(initialItems);
     const [editingItem, setEditingItem] = useState<Item | null>(null);
     const [historyItemId, setHistoryItemId] = useState<string | null>(null);
@@ -92,6 +92,7 @@ export function AdminItemsList({ initialItems }: { initialItems: Item[] }) {
             {editingItem && (
                 <EditItemDialog 
                     item={editingItem} 
+                    categories={categories}
                     onClose={() => {
                         setEditingItem(null);
                         // Refresh to fetch the new parent data, while keeping state

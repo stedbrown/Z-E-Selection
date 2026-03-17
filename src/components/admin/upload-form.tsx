@@ -68,9 +68,9 @@ export function UploadForm({ categories }: UploadFormProps) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-xl bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-            <div>
+            <div className="w-full">
                 <h2 className="text-xl font-serif font-medium mb-4 text-gray-900">{t.addTitle}</h2>
-                {error && <div className="p-3 bg-red-50 text-red-600 rounded-md mb-4 text-sm">{error}</div>}
+                {error && <div className="p-3 bg-red-50 text-red-600 rounded-md mb-4 text-sm w-full break-words">{error}</div>}
             </div>
 
             <div className="space-y-2">
@@ -117,33 +117,25 @@ export function UploadForm({ categories }: UploadFormProps) {
 
                 <div className="grid gap-2">
                     <label className="text-sm font-medium text-gray-700">{t.category}</label>
-                    <div className="flex flex-wrap gap-2 mb-2">
+                    <select
+                        id="category"
+                        value={categories.find(c => c.name === category) ? category : (category !== '' ? 'altro' : '')}
+                        onChange={(e) => setCategory(e.target.value as Category)}
+                        className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        required
+                    >
+                        <option value="" disabled>Seleziona una categoria</option>
                         {categories.map((cat) => (
-                            <button
-                                key={cat.id}
-                                type="button"
-                                onClick={() => setCategory(cat.name)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${category === cat.name
-                                    ? 'bg-gray-900 text-white'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                    }`}
-                            >
-                                <span className="capitalize">{cat.name}</span>
-                            </button>
+                            <option key={cat.id} value={cat.name} className="capitalize">
+                                {cat.name}
+                            </option>
                         ))}
-                        <button
-                            type="button"
-                            onClick={() => setCategory('altro')}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!categories.find(c => c.name === category) && category !== ''
-                                ? 'bg-gray-900 text-white'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                }`}
-                        >
-                            {t.otherCategory}
-                        </button>
-                    </div>
-                    {!categories.find(c => c.name === category) && (
+                        <option value="altro">{t.otherCategory}</option>
+                    </select>
+
+                    {!categories.find(c => c.name === category) && category !== '' && (
                         <Input
+                            className="mt-2"
                             placeholder={t.customCategoryPlaceholder}
                             value={category === 'altro' ? '' : category}
                             onChange={(e) => setCategory(e.target.value)}

@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ImageGallery } from '@/components/image-gallery';
+import { ShareButton } from '@/components/share-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -116,19 +117,37 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
 
                     {/* Sold banner or WhatsApp CTA */}
                     {typedItem.is_sold ? (
-                        <div className="w-full text-center py-4 bg-gray-100 text-gray-500 font-medium rounded-xl border border-gray-200 text-sm tracking-wide uppercase">
-                            {t.soldOutMessage}
+                        <div className="flex items-center gap-3 w-full">
+                            <div className="flex-1 text-center py-4 bg-gray-100 text-gray-500 font-medium rounded-xl border border-gray-200 text-sm tracking-wide uppercase">
+                                {t.soldOutMessage}
+                            </div>
+                            <ShareButton 
+                                title={title}
+                                text={description}
+                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                label={t.share}
+                                copiedLabel={t.copied}
+                            />
                         </div>
                     ) : (
-                        <a
-                            href={whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-full py-4 px-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold rounded-xl transition-colors shadow-md gap-3 text-base"
-                        >
-                            <MessageCircle className="w-5 h-5" />
-                            {t.whatsapp}
-                        </a>
+                        <div className="flex items-center gap-3 w-full">
+                            <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center py-4 px-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold rounded-xl transition-colors shadow-md gap-3 text-base"
+                            >
+                                <MessageCircle className="w-5 h-5" />
+                                {t.whatsapp}
+                            </a>
+                            <ShareButton 
+                                title={title}
+                                text={description}
+                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                label={t.share}
+                                copiedLabel={t.copied}
+                            />
+                        </div>
                     )}
                 </div>
             </div>

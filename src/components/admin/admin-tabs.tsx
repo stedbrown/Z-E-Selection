@@ -79,7 +79,7 @@ export function AdminDashboardTabs({ items, categories, dict }: AdminDashboardTa
                 {activeTab === 'catalog' && (
                     <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-100 min-h-[500px]">
                         <h2 className="text-2xl font-serif font-medium mb-6 text-gray-900">{menu.catalog}</h2>
-                        <AdminItemsList initialItems={items} />
+                        <AdminItemsList initialItems={items} categories={categories} />
                     </div>
                 )}
                 {activeTab === 'new' && (
