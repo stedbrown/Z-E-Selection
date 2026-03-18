@@ -3,8 +3,10 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { createClient } from "@/lib/supabase/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { Logo } from "@/components/logo";
+import { Header } from "@/components/header";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,9 +31,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
   const cookieStore = await cookies();
   const lang = cookieStore.get('NEXT_LOCALE')?.value || 'it';
   const t = getDictionary(lang).site;
+
+  const { data: categories } = await supabase
+    .from('categories')
+    .select('name, translations')
+    .order('name', { ascending: true });
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -40,23 +48,25 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         {/* ── Header ── */}
-        <header className="glass-header">
-          <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-            <Link href="/" aria-label="Z&E Selection — Home" className="hover:opacity-80 transition-opacity">
-              <Logo className="text-2xl sm:text-3xl" />
-            </Link>
-            <nav className="flex items-center gap-8">
-              <Link 
-                href="/about" 
-                className="nav-link"
-              >
-                {lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'}
-              </Link>
-              <div className="h-4 w-px bg-gray-200 hidden sm:block" />
-              <LanguageSwitcher currentLang={lang} />
-            </nav>
-          </div>
-        </header>
+        <Header 
+          lang={lang} 
+          categories={categories || []} 
+          t={{
+            search: t.search || 'Cerca...',
+            categories: t.categories || 'Categorie',
+            about: lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'
+          }}
+          categoryLabels={(()=>{
+            const labels: Record<string, string> = {};
+            if (lang !== 'it') {
+              for (const cat of (categories || [])) {
+                const translated = (cat as any).translations?.[lang];
+                if (translated) labels[cat.name] = translated;
+              }
+            }
+            return labels;
+          })()}
+        />
 
         {/* ── Main ── */}
         <main className="flex-1 animate-fade-in">

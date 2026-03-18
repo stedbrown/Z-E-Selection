@@ -2,7 +2,9 @@ export const dictionaries: Record<string, any> = {
     it: {
         site: {
             title: "Z&E Selection",
-            footer: "Tutti i diritti riservati."
+            footer: "Tutti i diritti riservati.",
+            search: "Cerca nel catalogo...",
+            categories: "Sfoglia Categorie"
         },
         home: {
             title: "La Nostra Collezione",
@@ -90,7 +92,9 @@ export const dictionaries: Record<string, any> = {
     en: {
         site: {
             title: "Z&E Selection",
-            footer: "All rights reserved."
+            footer: "All rights reserved.",
+            search: "Search catalogue...",
+            categories: "Browse Categories"
         },
         home: {
             hero: {
@@ -189,7 +193,9 @@ export const dictionaries: Record<string, any> = {
     fr: {
         site: {
             title: "Z&E Selection",
-            footer: "Tous droits réservés."
+            footer: "Tous droits réservés.",
+            search: "Chercher dans le catalogue...",
+            categories: "Parcourir les Catégories"
         },
         home: {
             hero: {
@@ -288,7 +294,9 @@ export const dictionaries: Record<string, any> = {
     de: {
         site: {
             title: "Z&E Selection",
-            footer: "Alle Rechte vorbehalten."
+            footer: "Alle Rechte vorbehalten.",
+            search: "Katalog durchsuchen...",
+            categories: "Kategorien durchsuchen"
         },
         home: {
             hero: {

@@ -1,10 +1,9 @@
-'use client';
-
 import { useState, useMemo, useEffect } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { ItemCard } from '@/components/item-card';
 import { Item } from '@/types/item';
 import { createClient } from '@/lib/supabase/client';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface ItemGridProps {
     items: Item[];
@@ -32,6 +31,8 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
     const [offset, setOffset] = useState(0);
 
     const supabase = createClient();
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
     // Reset items when initialItems change (prop sync)
     useEffect(() => {
@@ -40,9 +41,19 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
         setHasMore(initialItems.length >= PAGE_SIZE);
     }, [initialItems]);
 
-    const handleCategoryChange = async (cat: string) => {
-        const newCat = cat === activeCategory ? '' : cat;
-        setActiveCategory(newCat);
+    // Handle URL param changes (Search and Category)
+    useEffect(() => {
+        const query = searchParams.get('q') || '';
+        const cat = searchParams.get('cat') || '';
+        
+        if (query !== search || cat !== activeCategory) {
+            setSearch(query);
+            setActiveCategory(cat);
+            performFullSearch(query, cat);
+        }
+    }, [searchParams]);
+
+    const performFullSearch = async (q: string, cat: string) => {
         setLoading(true);
         setOffset(0);
 
@@ -54,8 +65,13 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
                 .order('created_at', { ascending: false })
                 .range(0, PAGE_SIZE - 1);
             
-            if (newCat) {
-                query = query.eq('category', newCat);
+            if (cat) {
+                query = query.eq('category', cat);
+            }
+
+            if (q) {
+                // Search in title/description (simplified)
+                query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%`);
             }
 
             const { data } = await query;
@@ -66,6 +82,17 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleCategoryChange = (cat: string) => {
+        const newCat = cat === activeCategory ? '' : cat;
+        const params = new URLSearchParams(searchParams.toString());
+        if (newCat) {
+            params.set('cat', newCat);
+        } else {
+            params.delete('cat');
+        }
+        router.push(`/?${params.toString()}`, { scroll: false });
     };
 
     const loadMore = async () => {
@@ -85,6 +112,10 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
                 query = query.eq('category', activeCategory);
             }
 
+            if (search) {
+                query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
+            }
+
             const { data } = await query;
             if (data && data.length > 0) {
                 setItems(prev => [...prev, ...data]);
@@ -98,13 +129,7 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
         }
     };
 
-    const filtered = useMemo(() => {
-        // Search is still local for the current loaded items
-        return items.filter(item => {
-            const title = lang === 'it' ? item.title : (item.translations?.[lang]?.title || item.title);
-            return !search || title.toLowerCase().includes(search.toLowerCase());
-        });
-    }, [items, search, lang]);
+    const filtered = items;
 
     if (initialItems.length === 0 && !activeCategory) {
         return (
