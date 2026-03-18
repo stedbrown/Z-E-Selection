@@ -78,6 +78,13 @@ export const dictionaries: Record<string, any> = {
             add: "Aggiungi",
             empty: "Nessuna categoria presente.",
             confirmDelete: "Vuoi davvero eliminare questa categoria? Gli annunci esistenti manterranno questo testo."
+        },
+        about: {
+            title: "Chi Siamo",
+            subtitle: "Passione per l'antiquariato e la storia",
+            content1: "Z&E Selection nasce dalla passione di Zuhad ed Ema per il collezionismo e la ricerca di pezzi unici che raccontano storie dimenticate. La nostra missione è recuperare oggetti di valore, restituendo loro lo splendore di un tempo.",
+            content2: "Dalle monete rare all'oggettistica vintage, ogni pezzo della nostra collezione è selezionato con cura per garantirne l'autenticità e il fascino senza tempo. Siamo basati in Svizzera, ma la nostra ricerca non ha confini.",
+            contact: "Contattaci per qualsiasi informazione o per fissare un appuntamento."
         }
     },
     en: {
@@ -159,6 +166,13 @@ export const dictionaries: Record<string, any> = {
             add: "Add",
             empty: "No categories found.",
             confirmDelete: "Are you sure you want to delete this category? Existing items will keep their text."
+        },
+        about: {
+            title: "About Us",
+            subtitle: "Passion for Antiques and History",
+            content1: "Z&E Selection was born from Zuhad and Ema's passion for collecting and searching for unique pieces that tell forgotten stories. Our mission is to recover valuable objects, restoring them to their former glory.",
+            content2: "From rare coins to vintage objects, every piece in our collection is carefully selected to guarantee its authenticity and timeless charm. We are based in Switzerland, but our search knows no borders.",
+            contact: "Contact us for any information or to schedule an appointment."
         }
     },
     fr: {
@@ -240,6 +254,13 @@ export const dictionaries: Record<string, any> = {
             add: "Ajouter",
             empty: "Aucune catégorie présente.",
             confirmDelete: "Voulez-vous vraiment supprimer cette catégorie ? Les articles existants conserveront ce texte."
+        },
+        about: {
+            title: "À Propos de Nous",
+            subtitle: "Passion pour les Antiquités et l'Histoire",
+            content1: "Z&E Selection est né de la passion de Zuhad et Ema pour la collection et la recherche de pièces uniques qui racontent des histoires oubliées. Notre mission est de récupérer des objets de valeur, en leur redonnant leur gloire d'antan.",
+            content2: "Des pièces rares aux objets vintage, chaque pièce de notre collection est soigneusement sélectionnée pour garantir son authenticité et son charme intemporel. Nous sommes basati en Suisse, mais notre recherche ne connaît pas de frontières.",
+            contact: "Contactez-nous pour toute information ou pour prendre rendez-vous."
         }
     },
     de: {
@@ -321,6 +342,13 @@ export const dictionaries: Record<string, any> = {
             add: "Hinzufügen",
             empty: "Keine Kategorien vorhanden.",
             confirmDelete: "Möchten Sie diese Kategorie wirklich löschen? Bestehende Artikel behalten ihren Text."
+        },
+        about: {
+            title: "Über Uns",
+            subtitle: "Leidenschaft für Antiquitäten und Geschichte",
+            content1: "Z&E Selection entstand aus der Leidenschaft von Zuhad und Ema für das Sammeln und die Suche nach einzigartigen Stücken, die vergessene Geschichten erzählen. Unsere Mission ist es, wertvolle Objekte zu bergen und ihnen ihren alten Glanz zurückzugeben.",
+            content2: "Von seltenen Münzen bis hin zu Vintage-Objekten wird jedes Stück in unserer Sammlung sorgfältig ausgewählt, um seine Echtheit und seinen zeitlosen Charme zu garantieren. Wir haben unseren Sitz in der Schweiz, aber unsere Suche kennt keine Grenzen.",
+            contact: "Kontaktieren Sie uns für Informationen oder um einen Termin zu vereinbaren."
         }
     }
 };

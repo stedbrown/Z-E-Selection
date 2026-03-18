@@ -28,7 +28,8 @@ export function ItemGrid({ items, categories, categoryLabels, lang, t }: ItemGri
             const title = lang === 'it' ? item.title : (item.translations?.[lang]?.title || item.title);
             const cat = lang === 'it' ? item.category : (item.translations?.[lang]?.category || item.category);
             const matchesSearch = !search || title.toLowerCase().includes(search.toLowerCase());
-            const matchesCat = !activeCategory || item.category === activeCategory;
+            const matchesCat = !activeCategory || 
+                item.category?.toLowerCase().trim() === activeCategory.toLowerCase().trim();
             return matchesSearch && matchesCat;
         });
     }, [items, search, activeCategory, lang]);

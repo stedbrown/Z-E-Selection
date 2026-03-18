@@ -40,12 +40,19 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         {/* ── Header ── */}
-        <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-gray-100">
-          <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <Link href="/" aria-label="Z&E Selection — Home" className="hover:opacity-75 transition-opacity">
+        <header className="glass-header">
+          <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <Link href="/" aria-label="Z&E Selection — Home" className="hover:opacity-80 transition-opacity">
               <Logo className="text-2xl sm:text-3xl" />
             </Link>
-            <nav className="flex items-center gap-4">
+            <nav className="flex items-center gap-8">
+              <Link 
+                href="/about" 
+                className="nav-link"
+              >
+                {lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'}
+              </Link>
+              <div className="h-4 w-px bg-gray-200 hidden sm:block" />
               <LanguageSwitcher currentLang={lang} />
             </nav>
           </div>

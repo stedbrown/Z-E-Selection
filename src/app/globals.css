@@ -26,15 +26,57 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  :root {
+    --header-bg: rgba(253, 251, 247, 0.8);
+    --accent-gold: 197, 165, 114;
+  }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease both;
-  }
-
   @keyframes fadeIn {
     from { opacity: 0; }
-    to   { opacity: 1; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+}
+
+@layer components {
+  .glass-header {
+    @apply sticky top-0 z-50 bg-[#FDFBF7]/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm transition-all duration-300;
+  }
+  
+  .nav-link {
+    @apply relative text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10;
   }
 }
