@@ -6,7 +6,7 @@ interface LogoProps {
 
 export function Logo({ className = '', showSlogan = false, inverted = false }: LogoProps) {
     const textColor = inverted ? 'text-white' : 'text-gray-900';
-    const subColor = inverted ? 'text-white/60' : 'text-gray-400';
+    const subColor = inverted ? 'text-white/90' : 'text-gray-400';
     const dividerColor = inverted ? 'bg-gold-light' : 'bg-gold';
 
     return (

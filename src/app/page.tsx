@@ -52,7 +52,7 @@ export default async function Home() {
 
         {/* Content Container */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
-          <div className="mb-12 animate-fade-in opacity-80 hover:opacity-100 transition-opacity">
+          <div className="mb-12 animate-fade-in hover:scale-105 transition-transform">
             <Logo inverted className="scale-110 sm:scale-125" showSlogan />
           </div>
           
@@ -60,7 +60,7 @@ export default async function Home() {
             {t.title}
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-14 leading-relaxed font-light animate-slide-up delay-200">
+          <p className="text-lg sm:text-xl md:text-2xl text-white max-w-3xl mx-auto mb-14 leading-relaxed font-light animate-slide-up delay-200 [text-shadow:_0_2px_20px_rgba(0,0,0,0.3)]">
             {t.subtitle}
           </p>
 
@@ -75,10 +75,10 @@ export default async function Home() {
             </a>
             
             {itemCount > 0 && (
-              <div className="flex items-center gap-3 text-white/60 text-sm tracking-widest uppercase font-medium">
-                <span className="w-8 h-px bg-white/30" />
-                <span>{itemCount} {lang === 'en' ? 'Items' : lang === 'fr' ? 'Articles' : lang === 'de' ? 'Artikel' : 'Annunci'}</span>
-                <span className="w-8 h-px bg-white/30" />
+              <div className="flex items-center gap-3 text-white/90 text-sm tracking-widest uppercase font-medium">
+                <span className="w-8 h-px bg-white/40" />
+                <span><span className="text-white font-bold">{itemCount}</span> {lang === 'en' ? 'Items' : lang === 'fr' ? 'Articles' : lang === 'de' ? 'Artikel' : 'Annunci'}</span>
+                <span className="w-8 h-px bg-white/40" />
               </div>
             )}
           </div>
