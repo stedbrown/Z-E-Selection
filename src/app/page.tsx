@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ItemGrid } from '@/components/item-grid';
+import { ItemCard } from '@/components/item-card';
 import Image from 'next/image';
 import { Logo } from '@/components/logo';
 
@@ -10,9 +11,26 @@ export const dynamic = 'force-dynamic';
 export default async function Home() {
   const supabase = await createClient();
 
-  const [{ data: items }, { data: categories }] = await Promise.all([
-    supabase.from('items').select('*').eq('is_sold', false).order('created_at', { ascending: false }),
-    supabase.from('categories').select('name, translations').order('name', { ascending: true })
+  const now = new Date();
+  const todayStart = new Date(now.setHours(0, 0, 0, 0)).toISOString();
+
+  const [
+    { data: items }, 
+    { data: trendingItems },
+    { data: newItems },
+    { data: categories },
+    { count: totalCount }
+  ] = await Promise.all([
+    // Main catalogue with initial limit for performance
+    supabase.from('items').select('*').eq('is_sold', false).order('created_at', { ascending: false }).range(0, 11),
+    // Trending: most viewed
+    supabase.from('items').select('*').eq('is_sold', false).order('views', { ascending: false }).limit(4),
+    // New Today
+    supabase.from('items').select('*').eq('is_sold', false).gte('created_at', todayStart).order('created_at', { ascending: false }).limit(4),
+    // Categories
+    supabase.from('categories').select('name, translations').order('name', { ascending: true }),
+    // Total count for the hero label
+    supabase.from('items').select('*', { count: 'exact', head: true }).eq('is_sold', false)
   ]);
 
   const cookieStore = await cookies();
@@ -28,8 +46,6 @@ export default async function Home() {
       if (translated) categoryLabels[cat.name] = translated;
     }
   }
-
-  const itemCount = (items || []).length;
 
   return (
     <div>
@@ -74,10 +90,10 @@ export default async function Home() {
               </svg>
             </a>
             
-            {itemCount > 0 && (
+            {totalCount !== null && totalCount > 0 && (
               <div className="flex items-center gap-3 text-white/90 text-sm tracking-widest uppercase font-medium">
                 <span className="w-8 h-px bg-white/40" />
-                <span><span className="text-white font-bold">{itemCount}</span> {lang === 'en' ? 'Items' : lang === 'fr' ? 'Articles' : lang === 'de' ? 'Artikel' : 'Annunci'}</span>
+                <span><span className="text-white font-bold">{totalCount}</span> {lang === 'en' ? 'Items' : lang === 'fr' ? 'Articles' : lang === 'de' ? 'Artikel' : 'Annunci'}</span>
                 <span className="w-8 h-px bg-white/40" />
               </div>
             )}
@@ -90,11 +106,59 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── Today's New Arrivals ── */}
+      {newItems && newItems.length > 0 && (
+        <section className="container mx-auto px-4 sm:px-6 py-12 border-b border-gray-100">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl font-serif font-medium text-gray-900">
+                {t.newArrivals}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                {t.newArrivalsSubtitle}
+              </p>
+            </div>
+            <span className="px-3 py-1 bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-widest rounded-full border border-gold/20">
+              {newItems.length} {t.newBadge}
+            </span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {newItems.map(item => (
+              <ItemCard key={item.id} item={item} lang={lang as 'it' | 'en' | 'fr' | 'de'} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Trending Items ── */}
+      {trendingItems && trendingItems.length > 0 && (
+        <section className="container mx-auto px-4 sm:px-6 py-12 bg-gray-50/50">
+          <div className="mb-8">
+            <h2 className="text-2xl font-serif font-medium text-gray-900">
+              {t.trending}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              {t.trendingSubtitle}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {trendingItems.map(item => (
+              <ItemCard key={item.id} item={item} lang={lang as 'it' | 'en' | 'fr' | 'de'} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── Catalogue Anchor ── */}
       <div id="catalogue" className="scroll-mt-24" />
 
       {/* ── Catalogue ── */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="mb-10">
+          <h2 className="text-3xl font-serif font-medium text-gray-900">
+            {t.catalogue}
+          </h2>
+        </div>
         <ItemGrid
           items={items || []}
           categories={categoryNames}

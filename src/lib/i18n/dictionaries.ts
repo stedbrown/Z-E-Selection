@@ -93,6 +93,17 @@ export const dictionaries: Record<string, any> = {
             footer: "All rights reserved."
         },
         home: {
+            hero: {
+                title: "The Art of Time, Selected for You",
+                subtitle: "Explore an exclusive gallery of rare objects, precious coins, and exceptional antiques, curated with passion and dedication.",
+                trending: "Most Searched Pieces",
+                trendingSubtitle: "The most viewed items in our collection",
+                newArrivals: "New Arrivals Today",
+                newArrivalsSubtitle: "Our latest selected pieces",
+                catalogue: "Our Catalogue",
+                loadMore: "Load More Pieces",
+                newBadge: "New"
+            },
             title: "Our Collection",
             subtitle: "Discover unique pieces, carefully selected among antiques, quality second-hand and rare objects.",
             empty: "No items available at the moment.",
@@ -181,6 +192,17 @@ export const dictionaries: Record<string, any> = {
             footer: "Tous droits réservés."
         },
         home: {
+            hero: {
+                title: "L'Art du Temps, Sélectionné pour Vous",
+                subtitle: "Explorez une galerie exclusive d'objets rares, de pièces précieuses et d'antiquités exceptionnelles, sélectionnées avec passion et dévouement.",
+                trending: "Pièces Populaires",
+                trendingSubtitle: "Articles les plus consultés de notre collection",
+                newArrivals: "Ajoutés Aujourd'hui",
+                newArrivalsSubtitle: "Nos dernières pièces sélectionnées",
+                catalogue: "Notre Catalogue",
+                loadMore: "Charger Plus",
+                newBadge: "Nouveaux"
+            },
             title: "Notre Collection",
             subtitle: "Découvrez des pièces uniques, soigneusement sélectionnées parmi les antiquités et les objets rares.",
             empty: "Aucun article disponible pour le moment.",
@@ -259,7 +281,7 @@ export const dictionaries: Record<string, any> = {
             title: "À Propos de Nous",
             subtitle: "Passion pour les Antiquités et l'Histoire",
             content1: "Z&E Selection est né de la passion de Zuhad et Ema pour la collection et la recherche de pièces uniques qui racontent des histoires oubliées. Notre mission est de récupérer des objets de valeur, en leur redonnant leur gloire d'antan.",
-            content2: "Des pièces rares aux objets vintage, chaque pièce de notre collection est soigneusement sélectionnée pour garantir son authenticité et son charme intemporel. Nous sommes basati en Suisse, mais notre recherche ne connaît pas de frontières.",
+            content2: "Des pièces rares aux objets vintage, chaque pièce de notre collection est soigneusement sélectionnée pour garantir son authenticité et son charme intemporel. Nous sommes basés en Suisse, mais notre recherche ne connaît pas de frontières.",
             contact: "Contactez-nous pour toute information ou pour prendre rendez-vous."
         }
     },
@@ -269,6 +291,17 @@ export const dictionaries: Record<string, any> = {
             footer: "Alle Rechte vorbehalten."
         },
         home: {
+            hero: {
+                title: "Die Kunst der Zeit, für Sie ausgewählt",
+                subtitle: "Entdecken Sie eine exklusive Galerie seltener Objekte, wertvoller Münzen und außergewöhnlicher Antiquitäten, die mit Leidenschaft und Hingabe ausgewählt wurden.",
+                trending: "Beliebte Stücke",
+                trendingSubtitle: "Am häufigsten angesehene Artikel in unserer Sammlung",
+                newArrivals: "Heute Hinzugefügt",
+                newArrivalsSubtitle: "Unsere neuesten ausgewählten Stücke",
+                catalogue: "Unser Katalog",
+                loadMore: "Mehr Laden",
+                newBadge: "Neu"
+            },
             title: "Unsere Kollektion",
             subtitle: "Entdecken Sie einzigartige Stücke, sorgfältig ausgewählt aus Antiquitäten und seltenen Objekten.",
             empty: "Derzeit keine Artikel verfügbar.",

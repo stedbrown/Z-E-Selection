@@ -56,6 +56,9 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
 
     if (!item) notFound();
 
+    // Increment views (fire and forget on the server)
+    supabase.rpc('increment_item_views', { item_id: id }).then();
+
     const typedItem = item as Item;
 
     const cookieStore = await cookies();
