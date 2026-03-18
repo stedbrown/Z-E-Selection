@@ -75,8 +75,8 @@ export function ItemGrid({ items, categories, categoryLabels, lang, t }: ItemGri
                     <button
                         onClick={() => setActiveCategory('')}
                         className={`flex-shrink-0 px-5 py-2 rounded-full text-sm font-medium transition-all border ${!activeCategory
-                            ? 'bg-gray-900 text-white border-gray-900 shadow'
-                            : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'
+                            ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20'
+                            : 'bg-white text-gray-600 border-gray-200 hover:border-gold/50'
                         }`}
                     >
                         {t.allCategories}
@@ -86,8 +86,8 @@ export function ItemGrid({ items, categories, categoryLabels, lang, t }: ItemGri
                             key={cat}
                             onClick={() => setActiveCategory(cat === activeCategory ? '' : cat)}
                             className={`flex-shrink-0 px-5 py-2 rounded-full text-sm font-medium capitalize transition-all border ${activeCategory === cat
-                                ? 'bg-gray-900 text-white border-gray-900 shadow'
-                                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'
+                                ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20'
+                                : 'bg-white text-gray-600 border-gray-200 hover:border-gold/50'
                             }`}
                         >
                             {categoryLabels[cat] || cat}

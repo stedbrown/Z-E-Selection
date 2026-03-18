@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ItemGrid } from '@/components/item-grid';
 import Image from 'next/image';
+import { Logo } from '@/components/logo';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,66 +34,59 @@ export default async function Home() {
   return (
     <div>
       {/* ── Hero ── */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Parallax-ready styling */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image with optimized overlays */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/hero-antiques.png"
             alt="Antique coins, collectibles and numismatics"
             fill
-            className="object-cover scale-105"
+            className="object-cover"
             priority
             quality={100}
           />
-          {/* Multi-layered Gradient Overlays for Cinematic Depth */}
-          <div className="absolute inset-0 bg-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#FDFBF7]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FDFBF7]/20 via-transparent to-[#FDFBF7]/20" />
+          {/* Subtle overlays for a cleaner, high-end look */}
+          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-transparent to-black/10" />
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-20 text-center">
-          <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 animate-fade-in">
-            <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white font-bold">
-              {lang === 'en' ? 'Curated Collections' : lang === 'fr' ? 'Collections Sélectionnées' : lang === 'de' ? 'Auserlesene Sammlungen' : 'Collezioni Selezionate'}
-            </p>
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
+          <div className="mb-12 animate-fade-in opacity-80 hover:opacity-100 transition-opacity">
+            <Logo inverted className="scale-110 sm:scale-125" showSlogan />
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-serif text-white mb-8 leading-[1.1] tracking-tight animate-slide-up [text-shadow:_0_2px_40px_rgba(0,0,0,0.3)]">
-            {t.title.split(' ').map((word: string, i: number) => (
-              <span key={i} className={`inline-block mr-4 ${i % 2 === 1 ? 'italic font-light' : ''}`}>
-                {word}
-              </span>
-            ))}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-serif text-white mb-10 leading-[1] tracking-tight animate-slide-up [text-shadow:_0_4px_30px_rgba(0,0,0,0.25)]">
+            {t.title}
           </h1>
           
-          <p className="text-lg sm:text-2xl text-white/90 max-w-2xl mx-auto mb-12 leading-relaxed font-light animate-slide-up delay-200 [text-shadow:_0_1px_20px_rgba(0,0,0,0.2)]">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-14 leading-relaxed font-light animate-slide-up delay-200">
             {t.subtitle}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-slide-up delay-300">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 animate-slide-up delay-300">
             <a href="#catalogue" className="btn-primary group">
-              <span className="flex items-center gap-2">
+              <span>
                 {lang === 'en' ? 'Explore Catalogue' : lang === 'fr' ? 'Explorer le Catalogue' : lang === 'de' ? 'Katalog erkunden' : 'Esplora il Catalogo'}
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
               </span>
+              <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </a>
             
             {itemCount > 0 && (
-              <p className="text-sm text-white/80 font-medium tracking-wide backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-                <span className="text-white font-bold">{itemCount}</span> {lang === 'en' ? 'rare pieces available' : lang === 'fr' ? 'pièces rares disponibles' : lang === 'de' ? 'seltene Stücke verfügbar' : 'pezzi rari disponibili'}
-              </p>
+              <div className="flex items-center gap-3 text-white/60 text-sm tracking-widest uppercase font-medium">
+                <span className="w-8 h-px bg-white/30" />
+                <span>{itemCount} {lang === 'en' ? 'Items' : lang === 'fr' ? 'Articles' : lang === 'de' ? 'Artikel' : 'Annunci'}</span>
+                <span className="w-8 h-px bg-white/30" />
+              </div>
             )}
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center p-1.5">
-            <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
-          </div>
+        {/* Minimal Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-float opacity-50">
+          <div className="w-px h-16 bg-gradient-to-b from-white to-transparent" />
         </div>
       </section>
 

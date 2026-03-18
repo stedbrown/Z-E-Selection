@@ -5,6 +5,9 @@
   --color-cream-dark: #F3EFE6;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --color-gold-light: #E5C386;
+  --color-gold: #C5A572;
+  --color-gold-dark: #A68A58;
 }
 
 @layer base {
@@ -77,6 +80,14 @@
   }
 
   .btn-primary {
-    @apply px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10;
+    @apply px-10 py-4 bg-gold text-white rounded-full font-semibold hover:bg-gold-dark transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gold/20 hover:shadow-gold-dark/30 flex items-center justify-center gap-3 overflow-hidden relative;
+  }
+  
+  .btn-primary::after {
+    @apply content-[''] absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300;
+  }
+  
+  .btn-primary:hover::after {
+    @apply opacity-100;
   }
 }

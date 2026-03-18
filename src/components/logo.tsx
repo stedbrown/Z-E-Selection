@@ -7,7 +7,7 @@ interface LogoProps {
 export function Logo({ className = '', showSlogan = false, inverted = false }: LogoProps) {
     const textColor = inverted ? 'text-white' : 'text-gray-900';
     const subColor = inverted ? 'text-white/60' : 'text-gray-400';
-    const dividerColor = inverted ? 'bg-white/30' : 'bg-gray-300';
+    const dividerColor = inverted ? 'bg-gold-light' : 'bg-gold';
 
     return (
         <div className={`flex flex-col items-start select-none ${className}`}>
