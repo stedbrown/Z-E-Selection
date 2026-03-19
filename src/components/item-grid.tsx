@@ -112,19 +112,25 @@ export function ItemGrid({ items: initialItems, categories, categorySlugs, categ
         }
     };
 
-    const handleCategoryChange = (cat: string) => {
-        if (!cat) {
+    const handleCategoryChange = (catName: string) => {
+        if (catName === 'all') {
             router.push('/');
             return;
         }
-        const slug = categorySlugs[cat];
-        if (slug) {
-            router.push(`/category/${slug}`);
+
+        // Case-insensitive lookup for the slug
+        const targetSlug = Object.entries(categorySlugs || {}).find(
+            ([name]) => name.toLowerCase() === catName.toLowerCase()
+        )?.[1];
+
+        if (targetSlug) {
+            router.push(`/category/${targetSlug}`);
         } else {
-            // Fallback to URL param if slug is missing for some reason
+            // Fallback to URL param
             const params = new URLSearchParams(searchParams.toString());
-            params.set('cat', cat);
-            router.push(`/?${params.toString()}`, { scroll: false });
+            params.set('cat', catName);
+            params.delete('q');
+            router.push(`/?${params.toString()}`);
         }
     };
 

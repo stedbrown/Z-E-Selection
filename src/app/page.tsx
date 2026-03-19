@@ -19,7 +19,7 @@ export default async function Home() {
     // Main catalogue with initial limit for performance
     supabase.from('items').select('*').eq('is_sold', false).order('created_at', { ascending: false }).range(0, 11),
     // Categories
-    supabase.from('categories').select('name, translations').order('name', { ascending: true }),
+    supabase.from('categories').select('name, translations, slug').order('name', { ascending: true }),
     // Total count for the hero label
     supabase.from('items').select('*', { count: 'exact', head: true }).eq('is_sold', false)
   ]);

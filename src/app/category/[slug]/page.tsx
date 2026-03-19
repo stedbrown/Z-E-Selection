@@ -37,7 +37,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     { data: categories }
   ] = await Promise.all([
     supabase.from('items').select('*').eq('is_sold', false).ilike('category', category.name).order('created_at', { ascending: false }).range(0, 11),
-    supabase.from('categories').select('name, translations').order('name', { ascending: true })
+    supabase.from('categories').select('name, translations, slug').order('name', { ascending: true })
   ]);
 
   const cookieStore = await cookies();
