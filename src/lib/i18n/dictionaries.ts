@@ -7,19 +7,15 @@ export const dictionaries: Record<string, any> = {
             categories: "Sfoglia Categorie"
         },
         home: {
-            hero: {
-                title: "L'Arte del Tempo, Selezionata per Te",
-                subtitle: "Esplora una galleria esclusiva di oggetti rari, monete preziose e antiquariato d'eccellenza, curata con passione e dedizione.",
-                trending: "Pezzi più Cercati",
-                trendingSubtitle: "Gli articoli più visualizzati della nostra collezione",
-                newArrivals: "Novità di Oggi",
-                newArrivalsSubtitle: "I nostri ultimi pezzi selezionati",
-                catalogue: "Il Nostro Catalogo",
-                newBadge: "Nuovi"
-            },
+            title: "L'Arte del Tempo, Selezionata per Te",
+            subtitle: "Esplora una galleria esclusiva di oggetti rari, monete preziose e antiquariato d'eccellenza, curata con passione e dedizione.",
+            trending: "Pezzi più Cercati",
+            trendingSubtitle: "Gli articoli più visualizzati della nostra collezione",
+            newArrivals: "Novità di Oggi",
+            newArrivalsSubtitle: "I nostri ultimi pezzi selezionati",
+            catalogue: "Il Nostro Catalogo",
+            newBadge: "Nuovi",
             loadMore: "Carica Altri Pezzi",
-            title: "La Nostra Collezione",
-            subtitle: "Scopri pezzi unici, selezionati con cura tra antichità, usato di qualità e oggettistica rara.",
             empty: "Nessun oggetto disponibile al momento.",
             searchPlaceholder: "Cerca un oggetto...",
             allCategories: "Tutti",
@@ -108,19 +104,15 @@ export const dictionaries: Record<string, any> = {
             categories: "Browse Categories"
         },
         home: {
-            hero: {
-                title: "The Art of Time, Selected for You",
-                subtitle: "Explore an exclusive gallery of rare objects, precious coins, and exceptional antiques, curated with passion and dedication.",
-                trending: "Most Searched Pieces",
-                trendingSubtitle: "The most viewed items in our collection",
-                newArrivals: "New Arrivals Today",
-                newArrivalsSubtitle: "Our latest selected pieces",
-                catalogue: "Our Catalogue",
-                newBadge: "New"
-            },
+            title: "The Art of Time, Selected for You",
+            subtitle: "Explore an exclusive gallery of rare objects, precious coins, and exceptional antiques, curated with passion and dedication.",
+            trending: "Most Searched Pieces",
+            trendingSubtitle: "The most viewed items in our collection",
+            newArrivals: "New Arrivals Today",
+            newArrivalsSubtitle: "Our latest selected pieces",
+            catalogue: "Our Catalogue",
+            newBadge: "New",
             loadMore: "Load More Pieces",
-            title: "Our Collection",
-            subtitle: "Discover unique pieces, carefully selected among antiques, quality second-hand and rare objects.",
             empty: "No items available at the moment.",
             searchPlaceholder: "Search for an item...",
             allCategories: "All",
@@ -209,19 +201,15 @@ export const dictionaries: Record<string, any> = {
             categories: "Parcourir les Catégories"
         },
         home: {
-            hero: {
-                title: "L'Art du Temps, Sélectionné pour Vous",
-                subtitle: "Explorez une galerie exclusive d'objets rares, de pièces précieuses et d'antiquités exceptionnelles, sélectionnées avec passion et dévouement.",
-                trending: "Pièces Populaires",
-                trendingSubtitle: "Articles les plus consultés de notre collection",
-                newArrivals: "Ajoutés Aujourd'hui",
-                newArrivalsSubtitle: "Nos dernières pièces sélectionnées",
-                catalogue: "Notre Catalogue",
-                newBadge: "Nouveaux"
-            },
+            title: "L'Art du Temps, Sélectionné pour Vous",
+            subtitle: "Explorez une galerie exclusive d'objets rares, de pièces précieuses et d'antiquités exceptionnelles, sélectionnées avec passion et dévouement.",
+            trending: "Pièces Populaires",
+            trendingSubtitle: "Articles les plus consultés de notre collection",
+            newArrivals: "Ajoutés Aujourd'hui",
+            newArrivalsSubtitle: "Nos dernières pièces sélectionnées",
+            catalogue: "Notre Catalogue",
+            newBadge: "Nouveaux",
             loadMore: "Charger Plus",
-            title: "Notre Collection",
-            subtitle: "Découvrez des pièces uniques, soigneusement sélectionnées parmi les antiquités et les objets rares.",
             empty: "Aucun article disponible pour le moment.",
             searchPlaceholder: "Rechercher un article...",
             allCategories: "Tous",
@@ -291,14 +279,14 @@ export const dictionaries: Record<string, any> = {
             title: "Gérer les catégories",
             placeholder: "Nouvelle catégorie (ex. Vinyles)",
             add: "Ajouter",
-            empty: "Aucune catégorie présente.",
+            empty: "Aucune catégorie presente.",
             confirmDelete: "Voulez-vous vraiment supprimer cette catégorie ? Les articles existants conserveront ce texte."
         },
         about: {
             title: "À Propos de Nous",
             subtitle: "Passion pour les Antiquités et l'Histoire",
             content1: "Z&E Selection est né de la passion de Zuhad et Ema pour la collection et la recherche de pièces uniques qui racontent des histoires oubliées. Notre mission est de récupérer des objets de valeur, en leur redonnant leur gloire d'antan.",
-            content2: "Des pièces rares aux objets vintage, chaque pièce de notre collection est soigneusement sélectionnée pour garantir son authenticité et son charme intemporel. Nous sommes basés en Suisse, mais notre recherche ne connaît pas de frontières.",
+            content2: "Des pièces rares aux objets vintage, chaque pièce de notre collection est soigneusement sélectionnée pour garantir son authenticité et son charme intemporel. Nous sommes basés en Suisse, ma notre recherche ne connaît pas de frontières.",
             contact: "Contactez-nous pour toute information ou pour prendre rendez-vous."
         }
     },
@@ -310,19 +298,15 @@ export const dictionaries: Record<string, any> = {
             categories: "Kategorien durchsuchen"
         },
         home: {
-            hero: {
-                title: "Die Kunst der Zeit, für Sie ausgewählt",
-                subtitle: "Entdecken Sie eine exklusive Galerie seltener Objekte, wertvoller Münzen und außergewöhnlicher Antiquitäten, die mit Leidenschaft und Hingabe ausgewählt wurden.",
-                trending: "Beliebte Stücke",
-                trendingSubtitle: "Am häufigsten angesehene Artikel in unserer Sammlung",
-                newArrivals: "Heute Hinzugefügt",
-                newArrivalsSubtitle: "Unsere neuesten ausgewählten Stücke",
-                catalogue: "Unser Katalog",
-                newBadge: "Neu"
-            },
+            title: "Die Kunst der Zeit, für Sie ausgewählt",
+            subtitle: "Entdecken Sie eine exklusive Galerie seltener Objekte, wertvoller Münzen und außergewöhnlicher Antiquitäten, die mit Leidenschaft und Hingabe ausgewählt wurden.",
+            trending: "Beliebte Stücke",
+            trendingSubtitle: "Am häufigsten angesehene Artikel in unserer Sammlung",
+            newArrivals: "Heute Hinzugefügt",
+            newArrivalsSubtitle: "Unsere neuesten ausgewählten Stücke",
+            catalogue: "Unser Katalog",
+            newBadge: "Neu",
             loadMore: "Mehr Laden",
-            title: "Unsere Kollektion",
-            subtitle: "Entdecken Sie einzigartige Stücke, sorgfältig ausgewählt aus Antiquitäten und seltenen Objekten.",
             empty: "Derzeit keine Artikel verfügbar.",
             searchPlaceholder: "Nach einem Artikel suchen...",
             allCategories: "Alle",
@@ -398,8 +382,8 @@ export const dictionaries: Record<string, any> = {
         about: {
             title: "Über Uns",
             subtitle: "Leidenschaft für Antiquitäten und Geschichte",
-            content1: "Z&E Selection entstand aus der Leidenschaft von Zuhad und Ema für das Sammeln und die Suche nach einzigartigen Stücken, die vergessene Geschichten erzählen. Unsere Mission ist es, wertvolle Objekte zu bergen und ihnen ihren alten Glanz zurückzugeben.",
-            content2: "Von seltenen Münzen bis hin zu Vintage-Objekten wird jedes Stück in unserer Sammlung sorgfältig ausgewählt, um seine Echtheit und seinen zeitlosen Charme zu garantieren. Wir haben unseren Sitz in der Schweiz, aber unsere Suche kennt keine Grenzen.",
+            content1: "Z&E Selection entstand aus della Leidenschaft von Zuhad und Ema für das Sammeln und die Suche nach einzigartigen Stücken, die vergessene Geschichten erzählen. Unsere Mission ist es, wertvolle Objekte zu bergen und ihnen ihren alten Glanz zurückzugeben.",
+            content2: "Von seltenen Münzen bis hin zu Vintage-Objekten wird jedes Stück in unserer Sammlung sorgfältig ausgewählt, um seine Echtheit und seinen zeitlosen Charme zu garantieren. Wir haben unseren Sitz in der Schweiz, ma unsere Suche kennt keine Grenzen.",
             contact: "Kontaktieren Sie uns für Informationen oder um einen Termin zu vereinbaren."
         }
     }
