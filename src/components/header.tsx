@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, Menu, X, ChevronDown, LayoutGrid } from 'lucide-react';
+import { Search, Menu, X, ChevronDown, LayoutGrid, Loader2 } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
@@ -28,6 +28,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
     const categoriesRef = useRef<HTMLDivElement>(null);
@@ -36,7 +37,32 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
     useEffect(() => {
         const query = searchParams.get('q');
         if (query) setSearchValue(query);
+        else setSearchValue('');
     }, [searchParams]);
+
+    // Debounced URL Update for Instant Search
+    useEffect(() => {
+        if (!searchValue && !searchParams.get('q')) return;
+
+        const handler = setTimeout(() => {
+            const params = new URLSearchParams(searchParams.toString());
+            const currentQuery = params.get('q') || '';
+            
+            if (searchValue !== currentQuery) {
+                if (searchValue) params.set('q', searchValue);
+                else params.delete('q');
+                
+                // If not on home, redirect to home with the search param
+                const target = `/?${params.toString()}`;
+                router.push(target);
+                setIsSearching(true);
+                // Reset searching state after a short delay
+                setTimeout(() => setIsSearching(false), 800);
+            }
+        }, 400);
+
+        return () => clearTimeout(handler);
+    }, [searchValue]);
 
     // Close categories dropdown on click outside
     useEffect(() => {
@@ -48,18 +74,6 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
-
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        const params = new URLSearchParams(searchParams.toString());
-        if (searchValue) {
-            params.set('q', searchValue);
-        } else {
-            params.delete('q');
-        }
-        router.push(`/?${params.toString()}`);
-        setIsSearchOpen(false);
-    };
 
     return (
         <header className="glass-header sticky top-0 z-50">
@@ -110,15 +124,28 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                     </div>
 
                     {/* Search Bar Desktop */}
-                    <form onSubmit={handleSearch} className="relative flex-1 max-w-md">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    <form onSubmit={(e) => e.preventDefault()} className="relative flex-1 max-w-md group">
+                        <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${searchValue ? 'text-gold' : 'text-gray-400'}`} />
                         <input
                             type="text"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder={t.search}
-                            className="w-full pl-11 pr-4 py-2.5 bg-gray-100/50 border border-transparent rounded-full text-sm focus:bg-white focus:border-gold/30 focus:ring-4 focus:ring-gold/5 outline-none transition-all"
+                            className="w-full pl-11 pr-10 py-2.5 bg-gray-100/50 border border-transparent rounded-full text-sm focus:bg-white focus:border-gold/30 focus:ring-4 focus:ring-gold/5 outline-none transition-all"
                         />
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                            {isSearching ? (
+                                <Loader2 className="w-4 h-4 text-gold animate-spin" />
+                            ) : searchValue && (
+                                <button 
+                                    type="button"
+                                    onClick={() => setSearchValue('')}
+                                    className="p-1 text-gray-400 hover:text-gold transition-colors"
+                                >
+                                    <X className="w-4 h-4" />
+                                </button>
+                            )}
+                        </div>
                     </form>
                 </div>
 
@@ -137,9 +164,10 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                     <div className="flex lg:hidden items-center gap-2">
                         <button 
                             onClick={() => setIsSearchOpen(!isSearchOpen)}
-                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors relative"
                         >
                             <Search className="w-5 h-5" />
+                            {searchValue && <span className="absolute top-2 right-2 w-2 h-2 bg-gold rounded-full border-2 border-white" />}
                         </button>
                         <button 
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -154,23 +182,35 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
             {/* Mobile Search Overlay */}
             {isSearchOpen && (
                 <div className="lg:hidden absolute inset-x-0 top-0 h-20 bg-white z-50 flex items-center px-4 animate-in slide-in-from-top duration-300">
-                    <form onSubmit={handleSearch} className="flex-1 relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <form onSubmit={(e) => e.preventDefault()} className="flex-1 relative">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gold" />
                         <input
                             autoFocus
                             type="text"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder={t.search}
-                            className="w-full pl-12 pr-10 py-3 bg-gray-100 border-none rounded-xl text-base focus:ring-0 outline-none"
+                            className="w-full pl-12 pr-12 py-3 bg-gray-100 border-none rounded-xl text-base focus:ring-0 outline-none"
                         />
-                        <button 
-                            type="button"
-                            onClick={() => setIsSearchOpen(false)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-3">
+                            {isSearching && <Loader2 className="w-5 h-5 text-gold animate-spin" />}
+                            {searchValue && !isSearching && (
+                                <button 
+                                    type="button"
+                                    onClick={() => setSearchValue('')}
+                                    className="p-1 text-gray-400"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            )}
+                            <button 
+                                type="button"
+                                onClick={() => setIsSearchOpen(false)}
+                                className="p-1 text-gray-400 border-l border-gray-200 pl-3"
+                            >
+                                {lang === 'it' ? 'Chiudi' : 'Close'}
+                            </button>
+                        </div>
                     </form>
                 </div>
             )}

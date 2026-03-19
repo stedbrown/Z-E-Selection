@@ -43,24 +43,6 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
         setHasMore(initialItems.length >= PAGE_SIZE);
     }, [initialItems]);
 
-    // Sync local search to URL with debounce
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            const params = new URLSearchParams(searchParams.toString());
-            const currentQ = params.get('q') || '';
-            if (search !== currentQ) {
-                if (search) {
-                    params.set('q', search);
-                } else {
-                    params.delete('q');
-                }
-                router.push(`/?${params.toString()}`, { scroll: false });
-            }
-        }, 500);
-
-        return () => clearTimeout(handler);
-    }, [search]);
-
     // Handle URL param changes (Search and Category)
     useEffect(() => {
         const query = searchParams.get('q') || '';
@@ -161,25 +143,6 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
 
     return (
         <div>
-            {/* Search + Filter Bar */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                {/* Search Input */}
-                <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                    <input
-                        type="text"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        placeholder={t.searchPlaceholder}
-                        className="w-full pl-11 pr-10 py-3 bg-white border border-gray-200 rounded-full text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition shadow-sm"
-                    />
-                    {search && (
-                        <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700">
-                            <X className="w-4 h-4" />
-                        </button>
-                    )}
-                </div>
-            </div>
 
             {/* Category Pills — horizontal scroll strip */}
             <div className="relative mb-10">
