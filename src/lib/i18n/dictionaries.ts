@@ -18,7 +18,7 @@ export const dictionaries: Record<string, any> = {
             loadMore: "Carica Altri Pezzi",
             empty: "Nessun oggetto disponibile al momento.",
             searchPlaceholder: "Cerca un oggetto...",
-            allCategories: "Tutti",
+            allCategories: "Tutte le categorie",
             noResults: "Nessun risultato trovato."
         },
         itemCard: {
@@ -115,7 +115,7 @@ export const dictionaries: Record<string, any> = {
             loadMore: "Load More Pieces",
             empty: "No items available at the moment.",
             searchPlaceholder: "Search for an item...",
-            allCategories: "All",
+            allCategories: "All Categories",
             noResults: "No results found."
         },
         itemCard: {
@@ -212,7 +212,7 @@ export const dictionaries: Record<string, any> = {
             loadMore: "Charger Plus",
             empty: "Aucun article disponible pour le moment.",
             searchPlaceholder: "Rechercher un article...",
-            allCategories: "Tous",
+            allCategories: "Toutes les catégories",
             noResults: "Aucun résultat trouvé."
         },
         itemCard: {
@@ -309,7 +309,7 @@ export const dictionaries: Record<string, any> = {
             loadMore: "Mehr Laden",
             empty: "Derzeit keine Artikel verfügbar.",
             searchPlaceholder: "Nach einem Artikel suchen...",
-            allCategories: "Alle",
+            allCategories: "Alle Kategorien",
             noResults: "Keine Ergebnisse gefunden."
         },
         itemCard: {
