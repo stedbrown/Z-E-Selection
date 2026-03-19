@@ -68,7 +68,8 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
                 .range(0, PAGE_SIZE - 1);
             
             if (cat) {
-                query = query.eq('category', cat);
+                // Use case-insensitive match for category to avoid "Pietra" vs "pietra" issues
+                query = query.ilike('category', cat);
             }
 
             if (q) {
@@ -111,7 +112,7 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
                 .range(nextOffset, nextOffset + PAGE_SIZE - 1);
             
             if (activeCategory) {
-                query = query.eq('category', activeCategory);
+                query = query.ilike('category', activeCategory);
             }
 
             if (search) {
