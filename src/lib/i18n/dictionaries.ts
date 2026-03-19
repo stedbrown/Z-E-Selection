@@ -105,9 +105,9 @@ export const dictionaries: Record<string, any> = {
                 newArrivals: "New Arrivals Today",
                 newArrivalsSubtitle: "Our latest selected pieces",
                 catalogue: "Our Catalogue",
-                loadMore: "Load More Pieces",
                 newBadge: "New"
             },
+            loadMore: "Load More Pieces",
             title: "Our Collection",
             subtitle: "Discover unique pieces, carefully selected among antiques, quality second-hand and rare objects.",
             empty: "No items available at the moment.",
@@ -206,9 +206,9 @@ export const dictionaries: Record<string, any> = {
                 newArrivals: "Ajoutés Aujourd'hui",
                 newArrivalsSubtitle: "Nos dernières pièces sélectionnées",
                 catalogue: "Notre Catalogue",
-                loadMore: "Charger Plus",
                 newBadge: "Nouveaux"
             },
+            loadMore: "Charger Plus",
             title: "Notre Collection",
             subtitle: "Découvrez des pièces uniques, soigneusement sélectionnées parmi les antiquités et les objets rares.",
             empty: "Aucun article disponible pour le moment.",
@@ -307,9 +307,9 @@ export const dictionaries: Record<string, any> = {
                 newArrivals: "Heute Hinzugefügt",
                 newArrivalsSubtitle: "Unsere neuesten ausgewählten Stücke",
                 catalogue: "Unser Katalog",
-                loadMore: "Mehr Laden",
                 newBadge: "Neu"
             },
+            loadMore: "Mehr Laden",
             title: "Unsere Kollektion",
             subtitle: "Entdecken Sie einzigartige Stücke, sorgfältig ausgewählt aus Antiquitäten und seltenen Objekten.",
             empty: "Derzeit keine Artikel verfügbar.",
