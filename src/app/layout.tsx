@@ -54,6 +54,7 @@ export default async function RootLayout({
           t={{
             search: t.search || 'Cerca...',
             categories: t.categories || 'Categorie',
+            allCategories: t.allCategories || 'Tutte le categorie',
             about: lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'
           }}
           categoryLabels={(()=>{

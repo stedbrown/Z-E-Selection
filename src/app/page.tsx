@@ -11,22 +11,13 @@ export const dynamic = 'force-dynamic';
 export default async function Home() {
   const supabase = await createClient();
 
-  const now = new Date();
-  const todayStart = new Date(now.setHours(0, 0, 0, 0)).toISOString();
-
   const [
     { data: items }, 
-    { data: trendingItems },
-    { data: newItems },
     { data: categories },
     { count: totalCount }
   ] = await Promise.all([
     // Main catalogue with initial limit for performance
     supabase.from('items').select('*').eq('is_sold', false).order('created_at', { ascending: false }).range(0, 11),
-    // Trending: most viewed
-    supabase.from('items').select('*').eq('is_sold', false).order('views', { ascending: false }).limit(4),
-    // New Today
-    supabase.from('items').select('*').eq('is_sold', false).gte('created_at', todayStart).order('created_at', { ascending: false }).limit(4),
     // Categories
     supabase.from('categories').select('name, translations').order('name', { ascending: true }),
     // Total count for the hero label
@@ -105,49 +96,6 @@ export default async function Home() {
           <div className="w-px h-16 bg-gradient-to-b from-white to-transparent" />
         </div>
       </section>
-
-      {/* ── Today's New Arrivals ── */}
-      {newItems && newItems.length > 0 && (
-        <section className="container mx-auto px-4 sm:px-6 py-12 border-b border-gray-100">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-serif font-medium text-gray-900">
-                {t.newArrivals}
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">
-                {t.newArrivalsSubtitle}
-              </p>
-            </div>
-            <span className="px-3 py-1 bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-widest rounded-full border border-gold/20">
-              {newItems.length} {t.newBadge}
-            </span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {newItems.map(item => (
-              <ItemCard key={item.id} item={item} lang={lang as 'it' | 'en' | 'fr' | 'de'} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* ── Trending Items ── */}
-      {trendingItems && trendingItems.length > 0 && (
-        <section className="container mx-auto px-4 sm:px-6 py-12 bg-gray-50/50">
-          <div className="mb-8">
-            <h2 className="text-2xl font-serif font-medium text-gray-900">
-              {t.trending}
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              {t.trendingSubtitle}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingItems.map(item => (
-              <ItemCard key={item.id} item={item} lang={lang as 'it' | 'en' | 'fr' | 'de'} />
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ── Catalogue Anchor ── */}
       <div id="catalogue" className="scroll-mt-24" />

@@ -18,6 +18,7 @@ interface HeaderProps {
     t: {
         search: string;
         categories: string;
+        allCategories: string;
         about: string;
     };
     categoryLabels: Record<string, string>;
@@ -106,7 +107,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                         onClick={() => setIsCategoriesOpen(false)}
                                         className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-colors"
                                     >
-                                        {lang === 'it' ? 'Tutte le categorie' : 'All Categories'}
+                                        {t.allCategories}
                                     </Link>
                                     {categories.map((cat) => (
                                         <Link
@@ -228,7 +229,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                     className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 text-gray-800 font-medium"
                                 >
                                     <LayoutGrid className="w-5 h-5 text-gold" />
-                                    {lang === 'it' ? 'Tutte le categorie' : 'All Categories'}
+                                    {t.allCategories}
                                 </Link>
                                 {categories.map((cat) => (
                                     <Link
