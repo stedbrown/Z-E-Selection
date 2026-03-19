@@ -38,7 +38,7 @@ export default async function RootLayout({
 
   const { data: categories } = await supabase
     .from('categories')
-    .select('name, translations')
+    .select('name, translations, slug')
     .order('name', { ascending: true });
 
   return (

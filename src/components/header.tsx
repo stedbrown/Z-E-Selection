@@ -9,6 +9,7 @@ import { LanguageSwitcher } from '@/components/language-switcher';
 
 interface Category {
     name: string;
+    slug: string;
     translations?: Record<string, any>;
 }
 
@@ -112,7 +113,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                     {categories.map((cat) => (
                                         <Link
                                             key={cat.name}
-                                            href={`/?cat=${encodeURIComponent(cat.name)}`}
+                                            href={`/category/${cat.slug}`}
                                             onClick={() => setIsCategoriesOpen(false)}
                                             className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-colors capitalize"
                                         >
@@ -234,12 +235,12 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                 {categories.map((cat) => (
                                     <Link
                                         key={cat.name}
-                                        href={`/?cat=${encodeURIComponent(cat.name)}`}
+                                        href={`/category/${cat.slug}`}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="p-4 rounded-2xl border border-gray-100 text-gray-700 capitalize flex items-center justify-between"
+                                        className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 text-gray-800 font-medium capitalize"
                                     >
+                                        <div className="w-2 h-2 rounded-full bg-gold" />
                                         {categoryLabels[cat.name] || cat.name}
-                                        <ChevronDown className="-rotate-90 w-4 h-4 text-gray-300" />
                                     </Link>
                                 ))}
                             </div>

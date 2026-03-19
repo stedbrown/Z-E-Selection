@@ -42,9 +42,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const cookieStore = await cookies();
   const lang = cookieStore.get('NEXT_LOCALE')?.value || 'it';
-  const t = getDictionary(lang).home;
+  const dict = getDictionary(lang);
+  const t = dict.home;
 
   const categoryNames = (categories || []).map((c: { name: string }) => c.name);
+  const categorySlugs: Record<string, string> = {};
+  for (const cat of (categories || [])) {
+    categorySlugs[cat.name] = (cat as any).slug;
+  }
   const categoryLabels: Record<string, string> = {};
   if (lang !== 'it') {
     for (const cat of (categories || [])) {
@@ -73,7 +78,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             className="flex items-center gap-2 text-white/70 hover:text-gold mb-6 transition-colors group"
           >
             <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span className="text-sm font-medium uppercase tracking-widest">{t.back || 'Back to Home'}</span>
+            <span className="text-sm font-medium uppercase tracking-widest">{dict.itemDetails.back}</span>
           </Link>
           
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-white mb-4 leading-tight capitalize">
@@ -90,7 +95,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           items={items || []}
           categories={categoryNames}
           categoryLabels={categoryLabels}
+          categorySlugs={categorySlugs}
           lang={lang as 'it' | 'en' | 'fr' | 'de'}
+          pinnedCategory={category.name}
           t={t}
         />
       </section>

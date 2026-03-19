@@ -38,6 +38,11 @@ export default async function Home() {
     }
   }
 
+  const categorySlugs: Record<string, string> = {};
+  for (const cat of (categories || [])) {
+    categorySlugs[cat.name] = (cat as any).slug;
+  }
+
   return (
     <div>
       {/* ── Hero ── */}
@@ -111,6 +116,7 @@ export default async function Home() {
           items={items || []}
           categories={categoryNames}
           categoryLabels={categoryLabels}
+          categorySlugs={categorySlugs}
           lang={lang as 'it' | 'en' | 'fr' | 'de'}
           t={t}
         />

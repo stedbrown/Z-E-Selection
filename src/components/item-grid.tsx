@@ -11,8 +11,11 @@ interface ItemGridProps {
     items: Item[];
     categories: string[];
     /** Map from original (IT) category name → translated label for the current lang */
+    /** Map from original (IT) category name → slug */
+    categorySlugs: Record<string, string>;
     categoryLabels: Record<string, string>;
     lang: 'it' | 'en' | 'fr' | 'de';
+    pinnedCategory?: string;
     t: {
         searchPlaceholder: string;
         allCategories: string;
@@ -24,10 +27,10 @@ interface ItemGridProps {
 
 const PAGE_SIZE = 12;
 
-export function ItemGrid({ items: initialItems, categories, categoryLabels, lang, t }: ItemGridProps) {
+export function ItemGrid({ items: initialItems, categories, categorySlugs, categoryLabels, lang, pinnedCategory, t }: ItemGridProps) {
     const [items, setItems] = useState<Item[]>(initialItems);
     const [search, setSearch] = useState('');
-    const [activeCategory, setActiveCategory] = useState('');
+    const [activeCategory, setActiveCategory] = useState(pinnedCategory || '');
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(initialItems.length >= PAGE_SIZE);
     const [offset, setOffset] = useState(0);
@@ -68,14 +71,14 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
     // Handle URL param changes (Search and Category)
     useEffect(() => {
         const query = searchParams.get('q') || '';
-        const cat = searchParams.get('cat') || '';
+        const cat = searchParams.get('cat') || pinnedCategory || '';
         
         if (query !== search || cat !== activeCategory) {
             setSearch(query);
             setActiveCategory(cat);
             performFullSearch(query, cat);
         }
-    }, [searchParams]);
+    }, [searchParams, pinnedCategory]);
 
     const performFullSearch = async (q: string, cat: string) => {
         setLoading(true);
@@ -110,14 +113,19 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
     };
 
     const handleCategoryChange = (cat: string) => {
-        const newCat = cat === activeCategory ? '' : cat;
-        const params = new URLSearchParams(searchParams.toString());
-        if (newCat) {
-            params.set('cat', newCat);
-        } else {
-            params.delete('cat');
+        if (!cat) {
+            router.push('/');
+            return;
         }
-        router.push(`/?${params.toString()}`, { scroll: false });
+        const slug = categorySlugs[cat];
+        if (slug) {
+            router.push(`/category/${slug}`);
+        } else {
+            // Fallback to URL param if slug is missing for some reason
+            const params = new URLSearchParams(searchParams.toString());
+            params.set('cat', cat);
+            router.push(`/?${params.toString()}`, { scroll: false });
+        }
     };
 
     const loadMore = async () => {
