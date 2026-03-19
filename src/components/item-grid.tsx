@@ -43,6 +43,24 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
         setHasMore(initialItems.length >= PAGE_SIZE);
     }, [initialItems]);
 
+    // Sync local search to URL with debounce
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            const params = new URLSearchParams(searchParams.toString());
+            const currentQ = params.get('q') || '';
+            if (search !== currentQ) {
+                if (search) {
+                    params.set('q', search);
+                } else {
+                    params.delete('q');
+                }
+                router.push(`/?${params.toString()}`, { scroll: false });
+            }
+        }, 500);
+
+        return () => clearTimeout(handler);
+    }, [search]);
+
     // Handle URL param changes (Search and Category)
     useEffect(() => {
         const query = searchParams.get('q') || '';
