@@ -67,15 +67,21 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
     }, [searchValue]);
 
     // Close menus on resize to desktop to avoid stuck scrolling or ghost overlays
+    // Using matchMedia for perfect sync with Tailwind 'lg' (1024px)
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 1024) { // lg breakpoint
+        const mql = window.matchMedia('(min-width: 1024px)');
+        const handleMatchChange = (e: MediaQueryListEvent | MediaQueryList) => {
+            if (e.matches) {
                 setIsMenuOpen(false);
                 setIsSearchOpen(false);
             }
         };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        
+        // Initial check
+        handleMatchChange(mql);
+        
+        mql.addEventListener('change', handleMatchChange);
+        return () => mql.removeEventListener('change', handleMatchChange);
     }, []);
 
     // Toggle body scroll when menu is open
@@ -115,7 +121,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                     <div className="relative" ref={categoriesRef}>
                         <button
                             onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer select-none ${
                                 isCategoriesOpen ? 'bg-gold text-white' : 'hover:bg-gold/10 text-gray-700'
                             }`}
                         >
@@ -179,11 +185,11 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                 <div className="flex items-center gap-3">
                     <Link 
                         href="/about" 
-                        className="hidden md:block nav-link text-sm font-medium text-gray-600 hover:text-gold"
+                        className="hidden lg:block nav-link text-sm font-medium text-gray-600 hover:text-gold"
                     >
                         {t.about}
                     </Link>
-                    <div className="hidden md:block h-4 w-px bg-gray-200" />
+                    <div className="hidden lg:block h-4 w-px bg-gray-200" />
                     <LanguageSwitcher currentLang={lang} />
                     
                     {/* Mobile Search & Menu Toggles */}
