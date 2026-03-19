@@ -102,10 +102,10 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
     }, []);
 
     return (
-        <header className="glass-header sticky top-0 z-50">
+        <header className="glass-header sticky top-0 z-50 select-none cursor-default">
             <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
                 {/* Logo */}
-                <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
+                <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity cursor-pointer select-none">
                     <Logo className="text-2xl sm:text-3xl" />
                 </Link>
 
@@ -130,7 +130,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                     <Link
                                         href="/"
                                         onClick={() => setIsCategoriesOpen(false)}
-                                        className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-colors"
+                                        className="block px-4 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-all duration-300 cursor-pointer select-none"
                                     >
                                         {t.allCategories}
                                     </Link>
@@ -139,7 +139,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                             key={cat.name}
                                             href={`/category/${cat.slug}`}
                                             onClick={() => setIsCategoriesOpen(false)}
-                                            className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-colors capitalize"
+                                            className="block px-4 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-gold/10 hover:text-gold transition-all duration-300 capitalize cursor-pointer select-none"
                                         >
                                             {categoryLabels[cat.name] || cat.name}
                                         </Link>
@@ -157,7 +157,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder={t.search}
-                            className="w-full pl-11 pr-10 py-2.5 bg-gray-100/50 border border-transparent rounded-full text-sm focus:bg-white focus:border-gold/30 focus:ring-4 focus:ring-gold/5 outline-none transition-all"
+                            className="w-full pl-11 pr-10 py-2.5 bg-gray-100/50 border border-transparent rounded-full text-sm focus:bg-white focus:border-gold/30 focus:ring-4 focus:ring-gold/5 outline-none transition-all cursor-text"
                         />
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
                             {isSearching ? (
@@ -166,7 +166,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                 <button 
                                     type="button"
                                     onClick={() => setSearchValue('')}
-                                    className="p-1 text-gray-400 hover:text-gold transition-colors"
+                                    className="p-1 text-gray-400 hover:text-gold transition-colors cursor-pointer"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -189,15 +189,21 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                     {/* Mobile Search & Menu Toggles */}
                     <div className="flex lg:hidden items-center gap-2">
                         <button 
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors relative"
+                            onClick={() => {
+                                setIsSearchOpen(!isSearchOpen);
+                                setIsMenuOpen(false);
+                            }}
+                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors relative cursor-pointer"
                         >
                             <Search className="w-5 h-5" />
                             {searchValue && <span className="absolute top-2 right-2 w-2 h-2 bg-gold rounded-full border-2 border-white" />}
                         </button>
                         <button 
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                            onClick={() => {
+                                setIsMenuOpen(!isMenuOpen);
+                                setIsSearchOpen(false);
+                            }}
+                            className="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
                         >
                             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -207,7 +213,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
             {/* Mobile Search Overlay */}
             {isSearchOpen && (
-                <div className="lg:hidden absolute inset-x-0 top-0 h-20 bg-white z-50 flex items-center px-4 animate-in slide-in-from-top duration-300">
+                <div className="lg:hidden fixed inset-x-0 top-0 h-20 bg-white z-[60] flex items-center px-4 animate-in slide-in-from-top duration-300 shadow-lg">
                     <form onSubmit={(e) => e.preventDefault()} className="flex-1 relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gold" />
                         <input
@@ -216,7 +222,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder={t.search}
-                            className="w-full pl-12 pr-12 py-3 bg-gray-100 border-none rounded-xl text-base focus:ring-0 outline-none"
+                            className="w-full pl-12 pr-12 py-3 bg-gray-100 border-none rounded-xl text-base focus:ring-0 outline-none cursor-text"
                         />
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-3">
                             {isSearching && <Loader2 className="w-5 h-5 text-gold animate-spin" />}
@@ -261,7 +267,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
                                         key={cat.name}
                                         href={`/category/${cat.slug}`}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 text-gray-800 font-medium capitalize"
+                                        className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 text-gray-800 font-medium capitalize cursor-pointer select-none active:scale-95 transition-transform"
                                     >
                                         <div className="w-2 h-2 rounded-full bg-gold" />
                                         {categoryLabels[cat.name] || cat.name}
