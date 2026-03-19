@@ -7,6 +7,17 @@ export const dictionaries: Record<string, any> = {
             categories: "Sfoglia Categorie"
         },
         home: {
+            hero: {
+                title: "L'Arte del Tempo, Selezionata per Te",
+                subtitle: "Esplora una galleria esclusiva di oggetti rari, monete preziose e antiquariato d'eccellenza, curata con passione e dedizione.",
+                trending: "Pezzi più Cercati",
+                trendingSubtitle: "Gli articoli più visualizzati della nostra collezione",
+                newArrivals: "Novità di Oggi",
+                newArrivalsSubtitle: "I nostri ultimi pezzi selezionati",
+                catalogue: "Il Nostro Catalogo",
+                newBadge: "Nuovi"
+            },
+            loadMore: "Carica Altri Pezzi",
             title: "La Nostra Collezione",
             subtitle: "Scopri pezzi unici, selezionati con cura tra antichità, usato di qualità e oggettistica rara.",
             empty: "Nessun oggetto disponibile al momento.",
