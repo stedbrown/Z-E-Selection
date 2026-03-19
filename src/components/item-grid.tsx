@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { ItemCard } from '@/components/item-card';
 import { Item } from '@/types/item';
@@ -31,10 +31,32 @@ export function ItemGrid({ items: initialItems, categories, categoryLabels, lang
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(initialItems.length >= PAGE_SIZE);
     const [offset, setOffset] = useState(0);
-
+    const containersRef = useRef<HTMLDivElement>(null);
     const supabase = createClient();
     const searchParams = useSearchParams();
     const router = useRouter();
+    const firstRender = useRef(true);
+
+    // Auto-scroll to catalogue when search or category changes from URL
+    useEffect(() => {
+        const query = searchParams.get('q') || '';
+        const cat = searchParams.get('cat') || '';
+
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+
+        if (query !== search || cat !== activeCategory) {
+            // Give time for UI to update then scroll
+            setTimeout(() => {
+                const catalogueAnchor = document.getElementById('catalogue');
+                if (catalogueAnchor) {
+                    catalogueAnchor.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    }, [searchParams]);
 
     // Reset items when initialItems change (prop sync)
     useEffect(() => {
