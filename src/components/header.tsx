@@ -66,6 +66,30 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
         return () => clearTimeout(handler);
     }, [searchValue]);
 
+    // Close menus on resize to desktop to avoid stuck scrolling or ghost overlays
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) { // lg breakpoint
+                setIsMenuOpen(false);
+                setIsSearchOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Toggle body scroll when menu is open
+    useEffect(() => {
+        if (isMenuOpen || isSearchOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMenuOpen, isSearchOpen]);
+
     // Close categories dropdown on click outside
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
