@@ -28,16 +28,13 @@ export default function LoginPage() {
         try {
             const { error } = await supabase.auth.signInWithOtp({
                 email,
-                options: {
-                    emailRedirectTo: `${window.location.origin}/admin/callback`,
-                },
             });
 
             if (error) throw error;
-            setMessage('Controlla la tua email per il Magic Link!');
+            // Reindirizza l'utente alla pagina di inserimento PIN
+            window.location.href = `/admin/verify?email=${encodeURIComponent(email)}`;
         } catch (err: any) {
             setError(err.message || 'Errore durante il login.');
-        } finally {
             setLoading(false);
         }
     };

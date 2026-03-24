@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { CloudinaryMultiUpload } from './cloudinary-multi-upload';
 import { Category } from '@/types/item';
 import { useAdminDict } from '@/components/admin/admin-dict-context';
+import { CheckCircle } from 'lucide-react';
 
 interface UploadFormProps {
     categories: { id: string, name: string }[];
@@ -25,6 +26,7 @@ export function UploadForm({ categories }: UploadFormProps) {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState<Category>('antiquariato');
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -52,12 +54,7 @@ export function UploadForm({ categories }: UploadFormProps) {
 
             if (!res.ok) throw new Error(t.saveError);
 
-            // Reset form on success
-            setImageUrl('');
-            setExtraImages([]);
-            setTitle('');
-            setDescription('');
-            setPrice('');
+            setSuccess(true);
             router.refresh(); // Refresh page to see new item in the list
         } catch (err: any) {
             setError(err.message || 'Qualcosa è andato storto.');
@@ -66,11 +63,36 @@ export function UploadForm({ categories }: UploadFormProps) {
         }
     };
 
+    if (success) {
+        return (
+            <div className="flex flex-col items-center justify-center py-16 px-6 max-w-xl mx-auto bg-white rounded-2xl shadow-sm border border-green-100 text-center space-y-4">
+                <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                    <CheckCircle className="w-12 h-12 text-green-500" />
+                </div>
+                <h2 className="text-3xl font-serif text-gray-900 tracking-tight">Cimelio Aggiunto!</h2>
+                <p className="text-gray-600 pb-6 text-base leading-relaxed">
+                    Il nuovo oggetto è stato salvato nel database ed è ora visibile nel catalogo.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
+                    <Button type="button" className="flex-1 h-12 text-base rounded-xl font-medium" onClick={() => {
+                        setSuccess(false);
+                        setImageUrl('');
+                        setExtraImages([]);
+                        setTitle('');
+                        setDescription('');
+                        setPrice('');
+                    }}>Aggiungi Nuovo</Button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-xl bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-xl bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
             <div className="w-full">
-                <h2 className="text-xl font-serif font-medium mb-4 text-gray-900">{t.addTitle}</h2>
-                {error && <div className="p-3 bg-red-50 text-red-600 rounded-md mb-4 text-sm w-full break-words">{error}</div>}
+                <h2 className="text-2xl font-serif font-medium mb-1 text-gray-900">{t.addTitle}</h2>
+                <p className="text-sm text-gray-500 mb-6">Inserisci le informazioni del nuovo oggetto per pubblicarlo nel catalogo.</p>
+                {error && <div className="p-3 bg-red-50 text-red-600 rounded-lg mb-4 text-sm w-full break-words">{error}</div>}
             </div>
 
             <div className="space-y-2">
