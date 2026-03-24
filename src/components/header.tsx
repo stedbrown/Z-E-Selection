@@ -87,15 +87,19 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
         return () => mql.removeEventListener('change', handleMatchChange);
     }, []);
 
-    // Toggle body scroll when menu is open
+    // Toggle body scroll when menu is open — with scrollbar-width compensation to prevent layout shift on desktop
     useEffect(() => {
         if (isMenuOpen || isSearchOpen) {
+            const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = `${scrollbarW}px`;
         } else {
             document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
         }
         return () => {
             document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
         };
     }, [isMenuOpen, isSearchOpen]);
 
@@ -285,7 +289,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
             {/* Mobile Navigation Drawer */}
             {isMenuOpen && (
-                <div className="lg:hidden fixed inset-0 top-20 bg-white z-40 border-t border-gray-100 flex flex-col overflow-hidden">
+                <div className="lg:hidden fixed inset-0 top-20 bg-white z-[55] border-t border-gray-100 flex flex-col overflow-hidden">
                     <div className="flex-1 overflow-y-auto p-6 space-y-8">
                         <div>
                             <h3 className="text-[10px] font-bold uppercase tracking-widest text-gold mb-4">{t.categories}</h3>
