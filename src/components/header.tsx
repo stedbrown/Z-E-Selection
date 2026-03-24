@@ -249,7 +249,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
             {/* Mobile Search Overlay */}
             {isSearchOpen && (
-                <div className="lg:hidden fixed inset-x-0 top-0 h-20 bg-white z-[60] flex items-center px-4 animate-in slide-in-from-top duration-300 shadow-lg">
+                <div className="lg:hidden fixed inset-x-0 top-0 h-20 bg-white z-[60] flex items-center px-4 shadow-lg border-b border-gray-100">
                     <form onSubmit={(e) => e.preventDefault()} className="flex-1 relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gold" />
                         <input
@@ -285,7 +285,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
             {/* Mobile Navigation Drawer */}
             {isMenuOpen && (
-                <div className="lg:hidden fixed inset-0 top-20 bg-white/95 backdrop-blur-lg z-40 border-t border-gray-100 animate-in slide-in-from-right duration-300 flex flex-col">
+                <div className="lg:hidden fixed inset-0 top-20 bg-white z-40 border-t border-gray-100 flex flex-col overflow-hidden">
                     <div className="flex-1 overflow-y-auto p-6 space-y-8">
                         <div>
                             <h3 className="text-[10px] font-bold uppercase tracking-widest text-gold mb-4">{t.categories}</h3>
