@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
-export async function GET() {
+export async function GET(req: Request) {
+    const authHeader = req.headers.get('authorization');
+    const cronSecret = process.env.CRON_SECRET;
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+        return new Response('Unauthorized', { status: 401 });
+    }
     try {
         const supabase = await createClient();
 

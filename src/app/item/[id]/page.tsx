@@ -9,6 +9,7 @@ import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ImageGallery } from '@/components/image-gallery';
 import { ShareButton } from '@/components/share-button';
+import { ItemCard } from '@/components/item-card';
 
 export const dynamic = 'force-dynamic';
 
@@ -62,7 +63,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
     const typedItem = item as Item;
 
     const cookieStore = await cookies();
-    const lang = cookieStore.get('NEXT_LOCALE')?.value || 'it';
+    const lang = (cookieStore.get('NEXT_LOCALE')?.value || 'it') as 'it' | 'en' | 'fr' | 'de';
     const t = getDictionary(lang).itemDetails;
 
     const title = lang === 'it' ? typedItem.title : (typedItem.translations?.[lang]?.title || typedItem.title);
@@ -80,26 +81,36 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
     const whatsappMessage = encodeURIComponent(`${msgStart} "${typedItem.title}"`);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
+    // Fetch related items (same category, excluding current item)
+    const { data: relatedItemsData } = await supabase
+        .from('items')
+        .select('*')
+        .eq('category', typedItem.category)
+        .neq('id', typedItem.id)
+        .limit(4);
+    const relatedItems = (relatedItemsData as Item[]) || [];
+
     return (
         <div className="container mx-auto px-4 py-8">
-            <Link href="/" className="inline-flex items-center text-gray-500 hover:text-gray-900 mb-8 transition-colors text-sm gap-2">
+            <Link href="/" className="inline-flex items-center text-gray-500 hover:text-gray-900 mb-6 transition-colors text-sm gap-2">
                 <ArrowLeft className="w-4 h-4" />
                 {t.back}
             </Link>
+
+            {/* Title and Category Header (Moved to Top) */}
+            <div className="mb-8">
+                <span className="text-xs tracking-widest text-gray-400 uppercase mb-3 block">{category}</span>
+                <h1 className="text-3xl md:text-5xl font-serif font-medium text-gray-900 leading-tight">
+                    {title}
+                </h1>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                 {/* Image Gallery */}
                 <ImageGallery images={allImages} title={title} />
 
                 {/* Details Section */}
-                <div className="flex flex-col">
-                    {/* Category badge */}
-                    <span className="text-xs tracking-widest text-gray-400 uppercase mb-3">{category}</span>
-
-                    {/* Title */}
-                    <h1 className="text-3xl md:text-4xl font-serif font-medium text-gray-900 mb-4 leading-tight">
-                        {title}
-                    </h1>
+                <div className="flex flex-col md:sticky md:top-28 self-start">
 
                     {/* Price */}
                     <p className="text-2xl font-semibold text-gray-900 mb-6">
@@ -154,6 +165,20 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                     )}
                 </div>
             </div>
+
+            {/* Related Items Section */}
+            {relatedItems.length > 0 && (
+                <div className="mt-24 border-t border-gray-100 pt-16">
+                    <h2 className="text-2xl font-serif font-medium text-gray-900 mb-8">
+                        {lang === 'it' ? 'Potrebbe interessarti anche' : lang === 'en' ? 'You might also like' : lang === 'fr' ? 'Vous aimerez peut-être aussi' : 'Das könnte dir auch gefallen'}
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+                        {relatedItems.map((relatedItem) => (
+                            <ItemCard key={relatedItem.id} item={relatedItem} lang={lang} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
