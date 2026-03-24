@@ -58,15 +58,18 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4 sm:pt-4 pt-10">
-            <div className="bg-white rounded-t-2xl sm:rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                <form onSubmit={handleSubmit} className="p-6 space-y-6">
-                    <div className="flex justify-between items-center border-b pb-4">
-                        <h2 className="text-xl font-serif font-medium text-gray-900">{t.editTitle}</h2>
-                        <button type="button" onClick={onClose} className="text-gray-500 hover:text-gray-900">{t.close}</button>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50">
+            <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg h-[90dvh] sm:h-auto sm:max-h-[90vh] flex flex-col">
+                <form onSubmit={handleSubmit} className="flex flex-col h-full overflow-hidden">
+                    <div className="p-5 pb-4 border-b flex-shrink-0">
+                        <div className="flex justify-between items-center">
+                            <h2 className="text-xl font-serif font-medium text-gray-900">{t.editTitle}</h2>
+                            <button type="button" onClick={onClose} className="text-gray-500 hover:text-gray-900 text-sm font-medium">{t.close}</button>
+                        </div>
                     </div>
 
-                    {error && <div className="p-3 bg-red-50 text-red-600 rounded-md text-sm">{error}</div>}
+                    <div className="flex-1 overflow-y-auto p-5 space-y-5">
+                        {error && <div className="p-3 bg-red-50 text-red-600 rounded-md text-sm">{error}</div>}
 
                     <div className="space-y-4">
                         <div className="grid gap-2">
@@ -122,9 +125,9 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
                         </div>
                     </div>
 
-                    <div className="flex justify-end gap-3 pt-4 border-t">
-                        <Button type="button" variant="outline" onClick={onClose} disabled={loading}>{t.cancel}</Button>
-                        <Button type="submit" disabled={loading}>
+                    <div className="flex-shrink-0 flex justify-end gap-3 p-5 border-t bg-white">
+                        <Button type="button" variant="outline" onClick={onClose} disabled={loading} className="h-11">{t.cancel}</Button>
+                        <Button type="submit" disabled={loading} className="h-11 px-8">
                             {loading ? t.saving : t.save}
                         </Button>
                     </div>

@@ -88,7 +88,7 @@ export function UploadForm({ categories }: UploadFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-xl bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+        <form onSubmit={handleSubmit} className="space-y-6 w-full bg-white p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100">
             <div className="w-full">
                 <h2 className="text-2xl font-serif font-medium mb-1 text-gray-900">{t.addTitle}</h2>
                 <p className="text-sm text-gray-500 mb-6">Inserisci le informazioni del nuovo oggetto per pubblicarlo nel catalogo.</p>

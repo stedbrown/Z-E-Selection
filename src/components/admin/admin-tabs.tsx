@@ -83,10 +83,8 @@ export function AdminDashboardTabs({ items, categories, dict }: AdminDashboardTa
                         </div>
                     )}
                     {activeTab === 'new' && (
-                        <div className="flex justify-center">
-                            <div className="w-full max-w-2xl">
-                                <UploadForm categories={categories} />
-                            </div>
+                        <div className="w-full">
+                            <UploadForm categories={categories} />
                         </div>
                     )}
                     {activeTab === 'categories' && (
