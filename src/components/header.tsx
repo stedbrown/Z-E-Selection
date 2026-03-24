@@ -289,7 +289,7 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
             {/* Mobile Navigation Drawer */}
             {isMenuOpen && (
-                <div className="lg:hidden fixed inset-0 top-20 bg-white z-[55] border-t border-gray-100 flex flex-col overflow-hidden">
+                <div className="lg:hidden fixed top-20 left-0 right-0 h-[calc(100vh-80px)] bg-white z-[55] border-t border-gray-100 flex flex-col">
                     <div className="flex-1 overflow-y-auto p-6 space-y-8">
                         <div>
                             <h3 className="text-[10px] font-bold uppercase tracking-widest text-gold mb-4">{t.categories}</h3>
