@@ -50,7 +50,7 @@ export default async function Home() {
         {/* Background Image with optimized overlays */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-antiques.png"
+            src="/hero-antiques.webp"
             alt="Antique coins, collectibles and numismatics"
             fill
             className="object-cover"
