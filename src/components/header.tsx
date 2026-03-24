@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, Menu, X, ChevronDown, LayoutGrid, Loader2 } from 'lucide-react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { Search, Menu, X, ChevronDown, LayoutGrid, Loader2, ArrowLeft } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
@@ -33,7 +33,10 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
     const [isSearching, setIsSearching] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
     const categoriesRef = useRef<HTMLDivElement>(null);
+    
+    const isAdmin = pathname?.startsWith('/admin');
 
     // Initial search value from URL
     useEffect(() => {
@@ -106,6 +109,25 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    if (isAdmin) {
+        return (
+            <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm flex items-center select-none">
+                <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+                    <Link href="/admin" className="hover:opacity-80 transition-opacity">
+                        <Logo className="text-2xl sm:text-3xl text-gray-900" />
+                    </Link>
+                    <Link 
+                        href="/" 
+                        className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm flex items-center gap-2 active:scale-95"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Torna al Catalogo
+                    </Link>
+                </div>
+            </header>
+        );
+    }
 
     return (
         <header className="glass-header sticky top-0 z-50 select-none cursor-default">
