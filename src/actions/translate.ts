@@ -3,10 +3,10 @@
 import * as deepl from 'deepl-node';
 
 const authKey = process.env.DEEPL_AUTH_KEY || '';
-const translator = new deepl.Translator(authKey);
+const translator = authKey && authKey !== 'your_deepl_auth_key_here' ? new deepl.Translator(authKey) : null;
 
 export async function translateText(text: string, targetLang: deepl.TargetLanguageCode) {
-    if (!authKey || authKey === 'your_deepl_auth_key_here') {
+    if (!translator) {
         console.warn('DeepL Auth Key not configured. Returning original text.');
         return text;
     }
