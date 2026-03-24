@@ -48,7 +48,7 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
 
             if (!res.ok) throw new Error(t.saveError);
 
-            router.refresh(); 
+            router.refresh();
             onClose();
         } catch (err: any) {
             setError(err.message || 'Qualcosa è andato storto.');
@@ -58,8 +58,8 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4 sm:pt-4 pt-10">
+            <div className="bg-white rounded-t-2xl sm:rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <form onSubmit={handleSubmit} className="p-6 space-y-6">
                     <div className="flex justify-between items-center border-b pb-4">
                         <h2 className="text-xl font-serif font-medium text-gray-900">{t.editTitle}</h2>
@@ -77,28 +77,28 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
                                 onExtraChange={setExtraImages}
                             />
                         </div>
-                        
+
                         <div className="grid gap-2">
-                            <label className="text-sm font-medium text-gray-700">{t.titleField}</label>
-                            <Input value={title} onChange={(e) => setTitle(e.target.value)} required />
+                            <label className="text-base sm:text-sm font-medium text-gray-800">{t.titleField}</label>
+                            <Input value={title} onChange={(e) => setTitle(e.target.value)} required className="text-base sm:text-sm h-12 sm:h-10" />
                         </div>
 
                         <div className="grid gap-2">
-                            <label className="text-sm font-medium text-gray-700">{t.price}</label>
-                            <Input type="number" step="0.05" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                            <label className="text-base sm:text-sm font-medium text-gray-800">{t.price}</label>
+                            <Input type="number" step="0.05" value={price} onChange={(e) => setPrice(e.target.value)} required className="text-base sm:text-sm h-12 sm:h-10" />
                         </div>
 
                         <div className="grid gap-2">
-                            <label className="text-sm font-medium text-gray-700">{t.description}</label>
-                            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <label className="text-base sm:text-sm font-medium text-gray-800">{t.description}</label>
+                            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} className="text-base sm:text-sm min-h-[100px]" />
                         </div>
 
                         <div className="grid gap-2">
-                            <label className="text-sm font-medium text-gray-700">{t.category}</label>
+                            <label className="text-base sm:text-sm font-medium text-gray-800">{t.category}</label>
                             <select
                                 value={categories.find(c => c.name === category) ? category : (category !== '' ? 'altro' : '')}
                                 onChange={(e) => setCategory(e.target.value as Category)}
-                                className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex h-12 sm:h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-base sm:text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                 required
                             >
                                 <option value="" disabled>Seleziona una categoria</option>
@@ -109,14 +109,14 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
                                 ))}
                                 <option value="altro">{t.otherCategory}</option>
                             </select>
-                            
+
                             {!categories.find(c => c.name === category) && category !== '' && (
-                                <Input 
-                                    className="mt-2"
-                                    value={category === 'altro' ? '' : category} 
-                                    onChange={(e) => setCategory(e.target.value)} 
-                                    placeholder={t.customCategoryPlaceholder} 
-                                    required 
+                                <Input
+                                    className="mt-2 text-base sm:text-sm h-12 sm:h-10"
+                                    value={category === 'altro' ? '' : category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    placeholder={t.customCategoryPlaceholder}
+                                    required
                                 />
                             )}
                         </div>

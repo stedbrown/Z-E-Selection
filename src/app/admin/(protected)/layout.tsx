@@ -21,12 +21,12 @@ export default async function AdminLayout({
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
-            <header className="bg-white border-b px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">
-                <h1 className="text-xl font-semibold">{t.title}</h1>
-                <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                    <span className="text-sm text-gray-500 truncate max-w-[200px] sm:max-w-none">{user.email}</span>
+            <header className="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b px-4 sm:px-6 py-3 flex justify-between items-center shadow-sm">
+                <h1 className="text-xl font-semibold tracking-tight">{t.title}</h1>
+                <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-500 hidden sm:block truncate max-w-[200px]">{user.email}</span>
                     <form action="/api/admin/logout" method="POST">
-                        <button type="submit" className="text-sm text-red-600 hover:underline">
+                        <button type="submit" className="text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-full transition-colors active:scale-95">
                             {t.logout}
                         </button>
                     </form>

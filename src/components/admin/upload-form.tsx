@@ -84,17 +84,18 @@ export function UploadForm({ categories }: UploadFormProps) {
 
             <div className="space-y-4">
                 <div className="grid gap-2">
-                    <label htmlFor="title" className="text-sm font-medium text-gray-700">{t.titleField}</label>
+                    <label htmlFor="title" className="text-base sm:text-sm font-medium text-gray-800">{t.titleField}</label>
                     <Input
                         id="title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Vaso di ceramica..."
+                        className="text-base sm:text-sm h-12 sm:h-10"
                     />
                 </div>
 
                 <div className="grid gap-2">
-                    <label htmlFor="price" className="text-sm font-medium text-gray-700">{t.price}</label>
+                    <label htmlFor="price" className="text-base sm:text-sm font-medium text-gray-800">{t.price}</label>
                     <Input
                         id="price"
                         type="number"
@@ -102,26 +103,28 @@ export function UploadForm({ categories }: UploadFormProps) {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder="49.90"
+                        className="text-base sm:text-sm h-12 sm:h-10"
                     />
                 </div>
 
                 <div className="grid gap-2">
-                    <label htmlFor="description" className="text-sm font-medium text-gray-700">{t.description}</label>
+                    <label htmlFor="description" className="text-base sm:text-sm font-medium text-gray-800">{t.description}</label>
                     <Textarea
                         id="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Dettagli sulle condizioni, epoca, materiali..."
+                        className="text-base sm:text-sm min-h-[100px]"
                     />
                 </div>
 
                 <div className="grid gap-2">
-                    <label className="text-sm font-medium text-gray-700">{t.category}</label>
+                    <label className="text-base sm:text-sm font-medium text-gray-800">{t.category}</label>
                     <select
                         id="category"
                         value={categories.find(c => c.name === category) ? category : (category !== '' ? 'altro' : '')}
                         onChange={(e) => setCategory(e.target.value as Category)}
-                        className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="flex h-12 sm:h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-base sm:text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         required
                     >
                         <option value="" disabled>Seleziona una categoria</option>
@@ -135,7 +138,7 @@ export function UploadForm({ categories }: UploadFormProps) {
 
                     {!categories.find(c => c.name === category) && category !== '' && (
                         <Input
-                            className="mt-2"
+                            className="mt-2 text-base sm:text-sm h-12 sm:h-10"
                             placeholder={t.customCategoryPlaceholder}
                             value={category === 'altro' ? '' : category}
                             onChange={(e) => setCategory(e.target.value)}

@@ -22,9 +22,9 @@ export function CloudinaryMultiUpload({
     onPrimaryChange,
     extraUrls,
     onExtraChange,
-    uploadLabel = 'Carica Foto Principale',
-    changeLabel = 'Cambia Foto Principale',
-    addLabel = 'Aggiungi Foto',
+    uploadLabel = 'Tocca per caricare (Principale)',
+    changeLabel = 'Cambia foto',
+    addLabel = 'Tocca per aggiungere',
 }: CloudinaryMultiUploadProps) {
     const addExtra = (url: string) => {
         onExtraChange([...extraUrls, url]);

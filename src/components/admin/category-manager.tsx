@@ -49,9 +49,9 @@ export function CategoryManager({ initialCategories }: CategoryManagerProps) {
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 max-w-xl">
             <h2 className="text-xl font-serif font-medium mb-6 text-gray-900">{t.title}</h2>
-            
+
             <form onSubmit={handleAdd} className="flex gap-2 mb-8">
-                <Input 
+                <Input
                     value={newCat}
                     onChange={(e) => setNewCat(e.target.value)}
                     placeholder={t.placeholder}
@@ -70,10 +70,10 @@ export function CategoryManager({ initialCategories }: CategoryManagerProps) {
                     <p className="text-sm text-gray-500">{t.empty}</p>
                 ) : (
                     categories.map(cat => (
-                        <div key={cat.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-md border border-gray-100">
-                            <span className="capitalize text-gray-700 font-medium">{cat.name}</span>
-                            <Button variant="ghost" size="icon" onClick={() => handleDelete(cat.id)} className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50">
-                                <Trash2 className="w-4 h-4" />
+                        <div key={cat.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
+                            <span className="capitalize text-gray-800 font-medium text-base">{cat.name}</span>
+                            <Button variant="ghost" size="icon" onClick={() => handleDelete(cat.id)} className="h-10 w-10 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-lg">
+                                <Trash2 className="w-5 h-5" />
                             </Button>
                         </div>
                     ))
