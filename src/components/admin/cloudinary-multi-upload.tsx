@@ -46,7 +46,7 @@ export function CloudinaryMultiUpload({
                             <CldUploadWidget
                                 uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                                 options={{ maxFiles: 1, resourceType: 'image', clientAllowedFormats: ['jpeg', 'png', 'webp'] }}
-                                onSuccess={(result: any) => { if (result.event === 'success') onPrimaryChange(result.info.secure_url); }}
+                                onSuccess={(result: any) => { if (result.event === 'success') { document.body.style.overflow = ''; onPrimaryChange(result.info.secure_url); } }}
                             >
                                 {({ open }) => (
                                     <div className="absolute inset-0 bg-black/40 sm:opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -62,7 +62,7 @@ export function CloudinaryMultiUpload({
                         <CldUploadWidget
                             uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                             options={{ maxFiles: 1, resourceType: 'image', clientAllowedFormats: ['jpeg', 'png', 'webp'] }}
-                            onSuccess={(result: any) => { if (result.event === 'success') onPrimaryChange(result.info.secure_url); }}
+                            onSuccess={(result: any) => { if (result.event === 'success') { document.body.style.overflow = ''; onPrimaryChange(result.info.secure_url); } }}
                         >
                             {({ open }) => (
                                 <button type="button" onClick={() => open()} className="w-full h-72 sm:h-96 rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center gap-4 text-gray-500 hover:bg-gray-100 hover:border-gray-400 transition-colors active:scale-[0.98]">
@@ -99,7 +99,7 @@ export function CloudinaryMultiUpload({
                     <CldUploadWidget
                         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                         options={{ maxFiles: 10, resourceType: 'image', clientAllowedFormats: ['jpeg', 'png', 'webp'], multiple: true }}
-                        onSuccess={(result: any) => { if (result.event === 'success') addExtra(result.info.secure_url); }}
+                        onSuccess={(result: any) => { if (result.event === 'success') { document.body.style.overflow = ''; addExtra(result.info.secure_url); } }}
                     >
                         {({ open }) => (
                             <button type="button" onClick={() => open()} className="flex-shrink-0 w-32 h-32 sm:w-28 sm:h-28 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-gray-700 transition-colors snap-start active:scale-95">
