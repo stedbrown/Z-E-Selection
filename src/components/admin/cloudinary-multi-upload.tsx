@@ -50,7 +50,7 @@ export function CloudinaryMultiUpload({
                             >
                                 {({ open }) => (
                                     <div className="absolute inset-0 bg-black/40 sm:opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <Button type="button" variant="secondary" onClick={() => open()} className="gap-2 h-12 px-6 rounded-full font-medium shadow-xl">
+                                        <Button type="button" variant="outline" onClick={() => open()} className="gap-2 h-12 px-6 rounded-full font-medium shadow-xl">
                                             <UploadCloud className="w-5 h-5" />
                                             {changeLabel}
                                         </Button>
