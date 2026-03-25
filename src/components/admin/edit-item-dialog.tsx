@@ -110,7 +110,7 @@ export function EditItemDialog({ item, categories, onClose }: { item: Item, cate
                                             {cat.name}
                                         </option>
                                     ))}
-                                    <option value="altro">{t.otherCategory}</option>
+                                    <option value="altro">+ Aggiungi nuova categoria</option>
                                 </select>
 
                                 {!categories.find(c => c.name === category) && category !== '' && (

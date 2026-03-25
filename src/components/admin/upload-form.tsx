@@ -155,7 +155,7 @@ export function UploadForm({ categories }: UploadFormProps) {
                                 {cat.name}
                             </option>
                         ))}
-                        <option value="altro">{t.otherCategory}</option>
+                        <option value="altro">+ Aggiungi nuova categoria</option>
                     </select>
 
                     {!categories.find(c => c.name === category) && category !== '' && (
