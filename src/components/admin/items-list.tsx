@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { History, Trash2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { History, Trash2, Search, Filter } from 'lucide-react';
 import { Item } from '@/types/item';
 import { EditItemDialog } from './edit-item-dialog';
 import { ItemHistoryDialog } from './item-history-dialog';
@@ -14,6 +15,12 @@ export function AdminItemsList({ initialItems, categories }: { initialItems: Ite
     const [items, setItems] = useState<Item[]>(initialItems);
     const [editingItem, setEditingItem] = useState<Item | null>(null);
     const [historyItemId, setHistoryItemId] = useState<string | null>(null);
+    
+    // Filters state
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filterCategory, setFilterCategory] = useState<string>('all');
+    const [filterStatus, setFilterStatus] = useState<'all' | 'available' | 'sold'>('all');
+
     const router = useRouter();
     const { adminItems: t } = useAdminDict();
 
@@ -53,13 +60,80 @@ export function AdminItemsList({ initialItems, categories }: { initialItems: Ite
         }
     };
 
-    if (items.length === 0) {
-        return <p className="text-gray-500 text-sm">{t.empty}</p>;
-    }
+    const filteredItems = items.filter(item => {
+        // Search
+        const searchLower = searchQuery.toLowerCase();
+        const matchesSearch = !searchQuery || 
+            item.title.toLowerCase().includes(searchLower) || 
+            (item.description && item.description.toLowerCase().includes(searchLower));
+        
+        // Category
+        const matchesCategory = filterCategory === 'all' || item.category === filterCategory;
+        
+        // Status
+        const matchesStatus = filterStatus === 'all' || 
+                              (filterStatus === 'sold' && item.is_sold) ||
+                              (filterStatus === 'available' && !item.is_sold);
+                              
+        return matchesSearch && matchesCategory && matchesStatus;
+    });
 
     return (
-        <div className="space-y-4">
-            {items.map((item) => (
+        <div className="space-y-6">
+            {/* Filters Bar */}
+            <div className="flex flex-col sm:flex-row gap-3 bg-gray-50/50 p-3 sm:p-4 rounded-xl border border-gray-100">
+                <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
+                        <Search className="w-4 h-4" />
+                    </div>
+                    <Input 
+                        placeholder="Cerca per titolo o descrizione..." 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-9 h-11 bg-white border-gray-200"
+                    />
+                </div>
+                <div className="flex flex-row gap-3 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:w-40">
+                        <select 
+                            value={filterCategory} 
+                            onChange={(e) => setFilterCategory(e.target.value)}
+                            className="w-full h-11 pl-3 pr-8 rounded-md border border-gray-200 bg-white text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none"
+                        >
+                            <option value="all">Tutte le categorie</option>
+                            {categories.map(c => (
+                                <option key={c.id} value={c.name} className="capitalize">{c.name}</option>
+                            ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                            <Filter className="w-3.5 h-3.5" />
+                        </div>
+                    </div>
+                    <div className="relative flex-1 sm:w-36">
+                        <select 
+                            value={filterStatus} 
+                            onChange={(e) => setFilterStatus(e.target.value as any)}
+                            className="w-full h-11 pl-3 pr-8 rounded-md border border-gray-200 bg-white text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none"
+                        >
+                            <option value="all">Tutti gli stati</option>
+                            <option value="available">Disponibili</option>
+                            <option value="sold">Venduti</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                            <Filter className="w-3.5 h-3.5" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {filteredItems.length === 0 ? (
+                <div className="text-center py-12 bg-gray-50 rounded-xl border border-gray-100 border-dashed">
+                    <p className="text-gray-500 font-medium">Nessun oggetto trovato coi filtri attuali.</p>
+                    <Button variant="link" onClick={() => { setSearchQuery(''); setFilterCategory('all'); setFilterStatus('all'); }}>Reset filtri</Button>
+                </div>
+            ) : (
+                <div className="space-y-4">
+                    {filteredItems.map((item) => (
                 <div key={item.id} className={`flex flex-col sm:flex-row gap-4 p-4 border rounded-xl shadow-sm transition-all ${item.is_sold ? 'bg-gray-50 opacity-75' : 'bg-white hover:shadow-md'}`}>
                     {/* Image & Main Info Container */}
                     <div className="flex flex-row gap-4 w-full sm:w-auto items-start">
@@ -104,6 +178,8 @@ export function AdminItemsList({ initialItems, categories }: { initialItems: Ite
                     </div>
                 </div>
             ))}
+                </div>
+            )}
             {editingItem && (
                 <EditItemDialog
                     item={editingItem}
