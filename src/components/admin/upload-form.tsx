@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +27,14 @@ export function UploadForm({ categories }: UploadFormProps) {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState<Category>('antiquariato');
     const [success, setSuccess] = useState(false);
+    const topRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to top of this component when success state activates
+    useEffect(() => {
+        if (success && topRef.current) {
+            topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [success]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -65,7 +73,7 @@ export function UploadForm({ categories }: UploadFormProps) {
 
     if (success) {
         return (
-            <div className="flex flex-col items-center justify-center py-16 px-6 max-w-xl mx-auto bg-white rounded-2xl shadow-sm border border-green-100 text-center space-y-4">
+            <div ref={topRef} className="flex flex-col items-center justify-center py-16 px-6 w-full bg-white rounded-2xl shadow-sm border border-green-100 text-center space-y-4">
                 <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mb-4">
                     <CheckCircle className="w-12 h-12 text-green-500" />
                 </div>

@@ -116,22 +116,31 @@ export function Header({ lang, categories, t, categoryLabels }: HeaderProps) {
 
     if (isAdmin) {
         return (
-            <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm flex items-center select-none">
-                <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-                    <Link href="/admin" className="hover:opacity-80 transition-opacity">
-                        <Logo className="text-2xl sm:text-3xl text-gray-900" />
+            <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm select-none">
+                <div className="container mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
+                    {/* Left: Logo + Admin badge */}
+                    <Link href="/admin" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity shrink-0">
+                        <Logo className="text-xl sm:text-2xl text-gray-900" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-white bg-gray-900 px-2.5 py-1 rounded-full">
+                            Admin
+                        </span>
                     </Link>
-                    <div className="flex items-center gap-3">
+
+                    {/* Right: Actions */}
+                    <div className="flex items-center gap-2">
                         <Link 
                             href="/" 
-                            className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm flex items-center gap-2 active:scale-95"
+                            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all active:scale-95"
                         >
-                            <ArrowLeft className="w-4 h-4" />
-                            <span className="hidden sm:inline">Torna al Catalogo</span>
-                            <span className="sm:hidden">Catalogo</span>
+                            <ArrowLeft className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">Catalogo</span>
                         </Link>
+                        <div className="w-px h-5 bg-gray-200" />
                         <form action="/api/admin/logout" method="POST">
-                            <button type="submit" className="text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2.5 rounded-full transition-colors active:scale-95">
+                            <button 
+                                type="submit" 
+                                className="text-xs sm:text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 sm:px-4 py-2 rounded-full transition-colors active:scale-95"
+                            >
                                 Esci
                             </button>
                         </form>
