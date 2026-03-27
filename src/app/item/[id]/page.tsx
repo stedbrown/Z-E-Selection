@@ -91,43 +91,52 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
     const relatedItems = (relatedItemsData as Item[]) || [];
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <Link href="/" className="inline-flex items-center text-gray-500 hover:text-gray-900 mb-6 transition-colors text-sm gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                {t.back}
-            </Link>
+        <div className="min-h-screen bg-white md:bg-[#faf9f7] pb-24">
+            {/* Desktop split layout */}
+            <div className="max-w-7xl mx-auto lg:px-8 py-0 md:py-12">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-16 bg-white overflow-hidden md:rounded-3xl md:shadow-sm md:border md:border-gray-100">
+                    
+                    {/* Image Gallery Column (Mobile Full Bleed) */}
+                    <div className="w-full lg:sticky lg:top-0 lg:self-start bg-[#f8f7f5] relative">
+                        {/* Mobile back button overlay */}
+                        <div className="absolute top-4 left-4 z-20 md:hidden">
+                            <Link href="/" className="flex items-center justify-center w-10 h-10 bg-white/90 backdrop-blur-md rounded-full text-gray-900 shadow-md">
+                                <ArrowLeft className="w-5 h-5" />
+                            </Link>
+                        </div>
+                        <ImageGallery images={allImages} title={title} />
+                    </div>
 
-            {/* Title and Category Header (Moved to Top) */}
-            <div className="mb-8">
-                <span className="text-xs tracking-widest text-gray-400 uppercase mb-3 block">{category}</span>
-                <h1 className="text-3xl md:text-5xl font-serif font-medium text-gray-900 leading-tight">
-                    {title}
-                </h1>
-            </div>
+                    {/* Content Column (Mobile Padded) */}
+                    <div className="px-5 py-8 md:px-10 lg:px-12 md:py-12 flex flex-col justify-center">
+                        
+                        {/* Desktop Back Button */}
+                        <Link href="/" className="hidden md:inline-flex items-center text-gray-400 hover:text-gray-900 mb-8 transition-colors text-xs font-semibold tracking-widest uppercase gap-2 self-start">
+                            <ArrowLeft className="w-4 h-4" />
+                            {t.back}
+                        </Link>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-                {/* Image Gallery */}
-                <ImageGallery images={allImages} title={title} />
-
-                {/* Details Section */}
-                <div className="flex flex-col md:sticky md:top-28 self-start">
-
-                    {/* Price */}
-                    <p className="text-2xl font-semibold text-gray-900 mb-6">
-                        {priceFormatted}
-                    </p>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-100 mb-6" />
-
-                    {/* Description */}
-                    {description && (
+                        {/* Title & Category & Price */}
                         <div className="mb-8">
-                            <p className="whitespace-pre-wrap text-gray-600 leading-relaxed text-base">
-                                {description}
+                            <span className="text-[11px] tracking-[0.2em] text-gray-400 uppercase mb-4 block font-medium">{category}</span>
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-gray-900 leading-[1.15] mb-4">
+                                {title}
+                            </h1>
+                            <p className="text-2xl font-light text-gray-900 tracking-wide">
+                                {priceFormatted}
                             </p>
                         </div>
-                    )}
+
+                        <div className="h-px w-full bg-gray-100 mb-8" />
+
+                        {/* Description */}
+                        {description && (
+                            <div className="mb-10 prose prose-gray max-w-none">
+                                <p className="whitespace-pre-wrap text-gray-600 leading-relaxed text-[15px] sm:text-base font-light">
+                                    {description}
+                                </p>
+                            </div>
+                        )}
 
                     {/* Sold banner or CTA Actions */}
                     {typedItem.is_sold ? (
@@ -204,19 +213,22 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                 </div>
             </div>
 
-            {/* Related Items Section */}
-            {relatedItems.length > 0 && (
-                <div className="mt-24 border-t border-gray-100 pt-16">
-                    <h2 className="text-2xl font-serif font-medium text-gray-900 mb-8">
-                        {lang === 'it' ? 'Potrebbe interessarti anche' : lang === 'en' ? 'You might also like' : lang === 'fr' ? 'Vous aimerez peut-être aussi' : 'Das könnte dir auch gefallen'}
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
-                        {relatedItems.map((relatedItem) => (
-                            <ItemCard key={relatedItem.id} item={relatedItem} lang={lang} />
-                        ))}
+                {/* Related Items Section */}
+                {relatedItems.length > 0 && (
+                    <div className="mt-20 md:mt-24 px-5 md:px-0">
+                        <div className="border-t border-gray-200 pt-16">
+                            <h2 className="text-2xl font-serif font-medium text-gray-900 mb-8">
+                                {lang === 'it' ? 'Potrebbe interessarti anche' : lang === 'en' ? 'You might also like' : lang === 'fr' ? 'Vous aimerez peut-être aussi' : 'Das könnte dir auch gefallen'}
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+                                {relatedItems.map((relatedItem) => (
+                                    <ItemCard key={relatedItem.id} item={relatedItem} lang={lang} />
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }
