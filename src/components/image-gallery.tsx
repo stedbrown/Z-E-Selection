@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 interface ImageGalleryProps {
     images: string[];
@@ -12,6 +12,18 @@ interface ImageGalleryProps {
 export function ImageGallery({ images, title }: ImageGalleryProps) {
     const [active, setActive] = useState(0);
     const [startX, setStartX] = useState<number | null>(null);
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
+    useEffect(() => {
+        if (isFullscreen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isFullscreen]);
 
     if (images.length === 0) return null;
 
@@ -41,7 +53,11 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                     style={{ transform: `translateX(-${active * 100}%)` }}
                 >
                     {images.map((url, i) => (
-                        <div key={i} className="relative w-full h-full flex-shrink-0">
+                        <div 
+                            key={i} 
+                            className="relative w-full h-full flex-shrink-0 cursor-zoom-in"
+                            onClick={() => setIsFullscreen(true)}
+                        >
                             <Image
                                 src={url}
                                 alt={`${title} - view ${i + 1}`}
@@ -105,6 +121,73 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                             />
                         </button>
                     ))}
+                </div>
+            )}
+
+            {/* Fullscreen Lightbox Overlay */}
+            {isFullscreen && (
+                <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center select-none backdrop-blur-md">
+                    {/* Header / Actions */}
+                    <div className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex justify-between items-center z-50">
+                        <span className="text-white/70 text-sm font-medium tracking-[0.2em] uppercase pl-2">
+                            {active + 1} <span className="text-white/40 mx-1">/</span> {images.length}
+                        </span>
+                        <button 
+                            onClick={() => setIsFullscreen(false)}
+                            className="bg-white/10 hover:bg-white/20 text-white rounded-full p-2.5 transition-colors"
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+                    </div>
+
+                    {/* Main Fullscreen Image Area */}
+                    <div 
+                        className="relative w-full h-[75vh] sm:h-[80vh] flex items-center justify-center"
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                    >
+                        <Image
+                            src={images[active]}
+                            alt={`${title} - fullscreen view ${active + 1}`}
+                            fill
+                            className="object-contain"
+                            priority
+                            unoptimized
+                        />
+
+                        {/* Desktop Arrows */}
+                        {images.length > 1 && (
+                            <>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); prev(); }}
+                                    className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 md:p-4 transition-colors hidden sm:block"
+                                >
+                                    <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+                                </button>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); next(); }}
+                                    className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 md:p-4 transition-colors hidden sm:block"
+                                >
+                                    <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    
+                    {/* Thumbnails on Fullscreen */}
+                    {images.length > 1 && (
+                        <div className="absolute bottom-6 md:bottom-8 max-w-full px-4 flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                            {images.map((url, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setActive(i)}
+                                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden transition-all duration-300 ${i === active ? 'ring-2 ring-white opacity-100 scale-105' : 'opacity-40 hover:opacity-100'}`}
+                                >
+                                    <Image src={url} alt={`Thumbnail ${i + 1}`} fill className="object-cover" unoptimized />
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
