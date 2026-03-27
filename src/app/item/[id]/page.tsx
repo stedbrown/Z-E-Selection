@@ -118,7 +118,13 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
 
                         {/* Title & Category & Price */}
                         <div className="mb-8">
-                            <span className="text-[11px] tracking-[0.2em] text-gray-400 uppercase mb-4 block font-medium">{category}</span>
+                            <div className="flex flex-wrap items-center gap-y-1 gap-x-3 mb-4">
+                                <span className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">{category}</span>
+                                <span className="hidden sm:block text-[11px] text-gray-300">•</span>
+                                <span className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                                    {t.reference} ZE-{typedItem.id.slice(0, 6).toUpperCase()}
+                                </span>
+                            </div>
                             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-gray-900 leading-[1.15] mb-4">
                                 {title}
                             </h1>

@@ -31,7 +31,8 @@ export const dictionaries: Record<string, any> = {
             soldOutMessage: "Articolo Venduto",
             back: "Torna alla Home",
             share: "Condividi",
-            copied: "Copiato!"
+            copied: "Copiato!",
+            reference: "Rif."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -128,7 +129,8 @@ export const dictionaries: Record<string, any> = {
             soldOutMessage: "Item Sold",
             back: "Back to Home",
             share: "Share",
-            copied: "Copied!"
+            copied: "Copied!",
+            reference: "Ref."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -225,7 +227,8 @@ export const dictionaries: Record<string, any> = {
             soldOutMessage: "Article Vendu",
             back: "Retour à l'accueil",
             share: "Partager",
-            copied: "Copié !"
+            copied: "Copié !",
+            reference: "Réf."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -322,7 +325,8 @@ export const dictionaries: Record<string, any> = {
             soldOutMessage: "Artikel Verkauft",
             back: "Zurück zur Startseite",
             share: "Teilen",
-            copied: "Kopiert!"
+            copied: "Kopiert!",
+            reference: "Ref."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
