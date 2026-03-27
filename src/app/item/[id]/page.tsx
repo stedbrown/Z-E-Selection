@@ -131,9 +131,21 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
 
                         {/* Description */}
                         {description && (
-                            <div className="mb-10 prose prose-gray max-w-none">
+                            <div className="mb-8 prose prose-gray max-w-none">
                                 <p className="whitespace-pre-wrap text-gray-600 leading-relaxed text-[15px] sm:text-base font-light">
                                     {description}
+                                </p>
+                            </div>
+                        )}
+
+                        {/* Call to Action Pre-text */}
+                        {!typedItem.is_sold && (
+                            <div className="mb-6 p-5 bg-[#faf9f7] rounded-2xl border border-gray-100">
+                                <h3 className="text-sm font-semibold text-gray-900 tracking-wide uppercase mb-2">
+                                    {lang === 'it' ? 'Ti interessa questo articolo?' : lang === 'en' ? 'Interested in this item?' : lang === 'fr' ? 'Cet article vous intéresse ?' : 'Interessiert an diesem Artikel?'}
+                                </h3>
+                                <p className="text-sm text-gray-500 font-light leading-relaxed">
+                                    {lang === 'it' ? 'Contattaci senza impegno per maggiori informazioni o per procedere all\'acquisto.' : lang === 'en' ? 'Contact us without obligation for more information or to proceed with the purchase.' : lang === 'fr' ? 'Contactez-nous sans engagement pour plus d\'informations ou pour procéder à l\'achat.' : 'Kontaktieren Sie uns unverbindlich für weitere Informationen oder um mit dem Kauf fortzufahren.'}
                                 </p>
                             </div>
                         )}
