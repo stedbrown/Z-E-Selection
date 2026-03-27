@@ -137,15 +137,15 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                             </div>
                             {/* Social Share Row */}
                             <div className="grid grid-cols-3 gap-3 w-full">
-                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-2 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Facebook className="w-4 h-4 text-[#1877F2]" />
+                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                    <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
                                     <span className="hidden sm:inline">Facebook</span>
                                 </a>
-                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-2 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Instagram className="w-4 h-4 text-[#E1306C]" />
+                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                    <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
                                     <span className="hidden sm:inline">Instagram</span>
                                 </a>
-                                <div className="[&>button]:w-full [&>button]:h-full">
+                                <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
                                     <ShareButton 
                                         title={title}
                                         text={description}
@@ -159,37 +159,37 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                     ) : (
                         <div className="flex flex-col gap-3 w-full">
                             {/* Contact Row */}
-                            <div className="flex items-center gap-3 w-full">
+                            <div className="grid grid-cols-2 gap-3 w-full">
                                 <a
                                     href={whatsappUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 flex items-center justify-center py-4 px-6 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-xl transition-all shadow-sm gap-3 text-base"
+                                    className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-xl transition-all shadow-sm gap-2 sm:gap-3 text-sm sm:text-base"
                                 >
-                                    <MessageCircle className="w-5 h-5 text-[#25D366]" />
-                                    {t.whatsapp}
+                                    <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0" />
+                                    <span className="truncate">{t.whatsapp}</span>
                                 </a>
                                 <a
                                     href={`tel:${whatsappNumber}`}
-                                    className="flex items-center justify-center px-6 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-medium rounded-xl transition-all shadow-sm gap-2"
+                                    className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-medium rounded-xl transition-all shadow-sm gap-2 text-sm sm:text-base"
                                     title="Chiama ora"
                                 >
-                                    <Phone className="w-5 h-5 text-gray-700" />
-                                    <span className="hidden sm:inline">Chiama</span>
+                                    <Phone className="w-5 h-5 text-gray-700 shrink-0" />
+                                    <span>Chiama</span>
                                 </a>
                             </div>
                             
                             {/* Social Share Row */}
                             <div className="grid grid-cols-3 gap-3 w-full">
-                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-2 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Facebook className="w-4 h-4 text-[#1877F2]" />
+                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                    <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
                                     <span className="hidden sm:inline">Facebook</span>
                                 </a>
-                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-2 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Instagram className="w-4 h-4 text-[#E1306C]" />
+                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                    <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
                                     <span className="hidden sm:inline">Instagram</span>
                                 </a>
-                                <div className="[&>button]:w-full [&>button]:h-full [&>button]:py-3 [&>button]:px-2">
+                                <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
                                     <ShareButton 
                                         title={title}
                                         text={description}
