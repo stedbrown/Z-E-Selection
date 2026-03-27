@@ -32,7 +32,17 @@ export const dictionaries: Record<string, any> = {
             back: "Torna alla Home",
             share: "Condividi",
             copied: "Copiato!",
-            reference: "Rif."
+            reference: "Rif.",
+            contactTitle: "Richiedi Informazioni",
+            fullName: "Nome e Cognome",
+            phoneNumber: "Numero di Telefono",
+            address: "Indirizzo",
+            country: "Città e Cap",
+            nation: "Paese e Nazione",
+            buyRequest: "Vorrei acquistare o ricevere info su questo articolo.",
+            sendEmail: "Invia Richiesta via Email",
+            successMessage: "Richiesta inviata con successo! Ti ricontatteremo a breve.",
+            errorMessage: "Errore durante l'invio. Riprova più tardi."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -130,7 +140,17 @@ export const dictionaries: Record<string, any> = {
             back: "Back to Home",
             share: "Share",
             copied: "Copied!",
-            reference: "Ref."
+            reference: "Ref.",
+            contactTitle: "Request Information",
+            fullName: "Full Name",
+            phoneNumber: "Phone Number",
+            address: "Address",
+            country: "City & ZIP",
+            nation: "Country & Nation",
+            buyRequest: "I would like to purchase or receive info about this item.",
+            sendEmail: "Send Email Request",
+            successMessage: "Request sent successfully! We will contact you shortly.",
+            errorMessage: "Error sending request. Please try again later."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -228,7 +248,17 @@ export const dictionaries: Record<string, any> = {
             back: "Retour à l'accueil",
             share: "Partager",
             copied: "Copié !",
-            reference: "Réf."
+            reference: "Réf.",
+            contactTitle: "Demande d'information",
+            fullName: "Nom et Prénom",
+            phoneNumber: "Numéro de Téléphone",
+            address: "Adresse",
+            country: "Ville et Code Postal",
+            nation: "Pays et Nation",
+            buyRequest: "Je souhaite acheter ou recevoir des infos su cet article.",
+            sendEmail: "Envoyer la demande par e-mail",
+            successMessage: "Demande envoyée avec succès ! Nous vous recontacterons sous peu.",
+            errorMessage: "Erreur lors de l'envoi. Veuillez réessayer plus tard."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -326,7 +356,17 @@ export const dictionaries: Record<string, any> = {
             back: "Zurück zur Startseite",
             share: "Teilen",
             copied: "Kopiert!",
-            reference: "Ref."
+            reference: "Ref.",
+            contactTitle: "Information anfordern",
+            fullName: "Vor- und Nachname",
+            phoneNumber: "Telefonnummer",
+            address: "Adresse",
+            country: "Stadt & PLZ",
+            nation: "Land & Nation",
+            buyRequest: "Ich möchte diesen Artikel kaufen oder Informationen dazu erhalten.",
+            sendEmail: "E-Mail-Anfrage senden",
+            successMessage: "Anfrage erfolgreich gesendet! Wir werden uns in Kürze bei Ihnen melden.",
+            errorMessage: "Fehler beim Senden. Bitte versuchen Sie es später noch einmal."
         },
         adminMenu: {
             title: "Z&E Selection Admin",

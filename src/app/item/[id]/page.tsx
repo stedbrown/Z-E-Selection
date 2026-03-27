@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, MessageCircle, Phone, Facebook, Instagram } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Facebook, Instagram } from 'lucide-react';
 import { Item } from '@/types/item';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -10,6 +10,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ImageGallery } from '@/components/image-gallery';
 import { ShareButton } from '@/components/share-button';
 import { ItemCard } from '@/components/item-card';
+import { ContactForm } from '@/components/contact-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -184,27 +185,20 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                             </div>
                         </div>
                     ) : (
-                        <div className="flex flex-col gap-3 w-full">
-                            {/* Contact Row */}
-                            <div className="grid grid-cols-2 gap-3 w-full">
-                                <a
-                                    href={whatsappUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-xl transition-all shadow-sm gap-2 sm:gap-3 text-sm sm:text-base"
-                                >
-                                    <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0" />
-                                    <span className="truncate">{t.whatsapp}</span>
-                                </a>
-                                <a
-                                    href={`tel:${whatsappNumber}`}
-                                    className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-medium rounded-xl transition-all shadow-sm gap-2 text-sm sm:text-base"
-                                    title="Chiama ora"
-                                >
-                                    <Phone className="w-5 h-5 text-gray-700 shrink-0" />
-                                    <span>Chiama</span>
-                                </a>
-                            </div>
+                        <div className="flex flex-col gap-6 w-full">
+                            {/* Primary WhatsApp Contact */}
+                            <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold rounded-xl transition-all shadow-md gap-3 text-base"
+                            >
+                                <MessageCircle className="w-5 h-5 text-white shrink-0" />
+                                <span>{t.whatsapp}</span>
+                            </a>
+
+                            {/* Detailed Email Contact Form */}
+                            <ContactForm itemId={typedItem.id} t={t} />
                             
                             {/* Social Share Row */}
                             <div className="grid grid-cols-3 gap-3 w-full">
