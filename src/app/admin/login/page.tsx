@@ -12,9 +12,10 @@ import { Mail, ArrowRight, Lock, AlertCircle } from 'lucide-react';
 const ALLOWED_ADMINS = [
     'stefanovananti@icloud.com',
     'emanuele.novara77@gmail.com',
-    'stefano.vananti@gmail.com', // Esempio 3
-    'info@zeselection.com',       // Esempio 4
-    'admin@zeselection.com'       // Esempio 5
+    'stefanovananti@gmail.com',
+    'stefano.vananti@gmail.com',
+    'info@zeselection.com',
+    'admin@zeselection.com'
 ];
 
 export default function LoginPage() {
