@@ -1,17 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/supabase/client';
-import { Mail, ArrowRight, Lock } from 'lucide-react';
+import { Mail, ArrowRight, Lock, AlertCircle } from 'lucide-react';
+
+// LISTA EMAIL AUTORIZZATE (White List)
+// Inserisci qui le email che possono accedere all'area admin.
+// Le altre verranno bloccate istantaneamente senza consumare la quota email di Supabase.
+const ALLOWED_ADMINS = [
+    'stefanovananti@icloud.com',
+    'emanuele.novara77@gmail.com',
+    'stefano.vananti@gmail.com', // Esempio 3
+    'info@zeselection.com',       // Esempio 4
+    'admin@zeselection.com'       // Esempio 5
+];
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const supabase = createClient();
+    
+    // Inizializza il client una sola volta
+    const supabase = useMemo(() => createClient(), []);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -21,23 +34,42 @@ export default function LoginPage() {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (loading) return;
+        
         setLoading(true);
         setError('');
         setMessage('');
 
+        const targetEmail = email.toLowerCase().trim();
+
+        // CONTROLLO PREVENTIVO (SICUREZZA 100%)
+        // Blocca le email non autorizzate PRIMA di chiamare Supabase
+        if (!ALLOWED_ADMINS.includes(targetEmail)) {
+            setError('Accesso Negato: Questa email non è fra quelle autorizzate nel pannello di controllo.');
+            setLoading(false);
+            return;
+        }
+
         try {
-            const { error } = await supabase.auth.signInWithOtp({
-                email,
+            const { error: authError } = await supabase.auth.signInWithOtp({
+                email: targetEmail,
                 options: {
                     // Reindirizza al callback per gestire lo scambio del codice PKCE
                     emailRedirectTo: `${window.location.origin}/auth/callback?next=/admin`,
                 }
             });
 
-            if (error) throw error;
+            if (authError) {
+                // Gestione specifica per il limite di invio di Supabase
+                if (authError.message.includes('rate limit')) {
+                  throw new Error('Limite invio email raggiunto. Attendi 60 minuti prima di richiedere un nuovo link.');
+                }
+                throw authError;
+            }
             
             // Reindirizza l'utente alla pagina di verifica per mostrare lo stato di attesa
-            window.location.href = `/admin/verify?email=${encodeURIComponent(email)}`;
+            window.location.href = `/admin/verify?email=${encodeURIComponent(targetEmail)}`;
         } catch (err: any) {
             setError(err.message || 'Errore durante l\'invio del link.');
             setLoading(false);
@@ -64,8 +96,8 @@ export default function LoginPage() {
 
                 {error && (
                     <div className="mb-6 p-4 bg-red-50/50 border border-red-100 text-red-600 rounded-2xl text-sm flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
-                        <span className="mt-0.5">●</span>
-                        {error}
+                        <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{error}</span>
                     </div>
                 )}
 
@@ -81,9 +113,10 @@ export default function LoginPage() {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="admin@zeselection.com"
+                                placeholder="nome@esempio.it"
                                 className="pl-12 h-14 bg-gray-50/50 border-gray-100 rounded-2xl focus:ring-black focus:border-black transition-all duration-300 text-base"
                                 required
+                                disabled={loading}
                             />
                         </div>
                     </div>
@@ -96,11 +129,11 @@ export default function LoginPage() {
                         {loading ? (
                             <div className="flex items-center gap-2">
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                <span>Invio link...</span>
+                                <span>Verifica autorizzazione...</span>
                             </div>
                         ) : (
                             <>
-                                <span>Invia Magic Link</span>
+                                <span>Accedi Ora</span>
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </>
                         )}
