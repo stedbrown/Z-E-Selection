@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         let authError;
 
         if (token_hash) {
-            // Flusso Magic Link tramite bottone
+            // Flusso Magic Link tramite bottone o auto-verifica
             const { error } = await supabase.auth.verifyOtp({
                 token_hash,
                 type: type as EmailOtpType,
@@ -27,16 +27,24 @@ export async function POST(req: Request) {
             });
             authError = error;
         } else {
-            return NextResponse.json({ error: 'Dati mancanti per la verifica.' }, { status: 400 });
+            return NextResponse.json({ error: 'Dati incompleti per la verifica. Riprova dalla mail.' }, { status: 400 });
         }
 
         if (authError) {
             console.error('Verify OTP Error:', authError.message);
-            return NextResponse.json({ error: authError.message }, { status: 401 });
+            // Messaggio più umano in base all'errore
+            let friendlyMessage = authError.message;
+            if (authError.message.includes('expired')) {
+              friendlyMessage = 'Il link o il codice è scaduto. Richiedine uno nuovo.';
+            } else if (authError.message.includes('invalid')) {
+              friendlyMessage = 'Il codice o il link non sono validi.';
+            }
+
+            return NextResponse.json({ error: friendlyMessage }, { status: 401 });
         }
 
         return NextResponse.json({ success: true, redirect: '/admin' });
     } catch (err: any) {
-        return NextResponse.json({ error: err.message || 'Errore interno' }, { status: 500 });
+        return NextResponse.json({ error: 'Errore interno del server. Riprova più tardi.' }, { status: 500 });
     }
 }
