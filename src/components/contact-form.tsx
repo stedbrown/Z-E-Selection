@@ -135,6 +135,19 @@ export function ContactForm({ itemId, t }: ContactFormProps) {
                             />
                         </div>
                     </div>
+
+                    {/* Messaggio / Note */}
+                    <div className="space-y-1.5">
+                        <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
+                            {t.message}
+                        </label>
+                        <textarea
+                            name="message"
+                            rows={3}
+                            placeholder="Scrivi qui eventuali domande o note aggiuntive..."
+                            className="w-auto min-h-[100px] w-full p-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none resize-none"
+                        />
+                    </div>
                 </div>
 
                 <div className="pt-2">

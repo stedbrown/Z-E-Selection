@@ -11,6 +11,7 @@ export async function submitContactForm(formData: FormData) {
     const phone = formData.get('phone') as string;
     const address = formData.get('address') as string;
     const country = formData.get('country') as string;
+    const message = formData.get('message') as string;
 
     if (!name || !itemId) {
         return { error: 'Name and Item ID are required' };
@@ -24,6 +25,7 @@ export async function submitContactForm(formData: FormData) {
             phone,
             address,
             country,
+            message,
             status: 'pending'
         });
 

@@ -43,7 +43,8 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Invia Richiesta via Email",
             successMessage: "Richiesta inviata con successo! Ti ricontatteremo a breve.",
             errorMessage: "Errore durante l'invio. Riprova più tardi.",
-            shippingNote: "Il prezzo della spedizione verrà concordato al ricevimento dell'ordine in base al paese di acquisto."
+            shippingNote: "Il prezzo della spedizione verrà concordato al ricevimento dell'ordine in base al paese di acquisto.",
+            message: "Messaggio / Note"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -152,7 +153,8 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Send Email Request",
             successMessage: "Request sent successfully! We will contact you shortly.",
             errorMessage: "Error sending request. Please try again later.",
-            shippingNote: "Shipping costs will be agreed upon receiving the order, based on the country of purchase."
+            shippingNote: "Shipping costs will be agreed upon receiving the order, based on the country of purchase.",
+            message: "Message / Notes"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -261,7 +263,8 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Envoyer la demande par e-mail",
             successMessage: "Demande envoyée avec succès ! Nous vous recontacterons sous peu.",
             errorMessage: "Erreur lors de l'envoi. Veuillez réessayer plus tard.",
-            shippingNote: "Les frais d'expédition seront convenus à la réception de la commande, en fonction du pays d'achat."
+            shippingNote: "Les frais d'expédition seront convenus à la réception de la commande, en fonction du pays d'achat.",
+            message: "Message / Notes"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -370,7 +373,8 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "E-Mail-Anfrage senden",
             successMessage: "Anfrage erfolgreich gesendet! Wir werden uns in Kürze bei Ihnen melden.",
             errorMessage: "Fehler beim Senden. Bitte versuchen Sie es später noch einmal.",
-            shippingNote: "Die Versandkosten werden nach Erhalt der Bestellung je nach Land des Kaufs vereinbart."
+            shippingNote: "Die Versandkosten werden nach Erhalt der Bestellung je nach Land des Kaufs vereinbart.",
+            message: "Nachricht / Notizen"
         },
         adminMenu: {
             title: "Z&E Selection Admin",
