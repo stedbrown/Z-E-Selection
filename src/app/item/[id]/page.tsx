@@ -147,14 +147,6 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                     {/* Contact & Shipping Notes Section (Full Width on Desktop) */}
                     <div className="lg:col-span-2 px-5 py-10 md:px-10 lg:px-16 md:py-16 bg-[#faf9f7]/50 border-t border-gray-100">
                         <div className="max-w-3xl mx-auto">
-                            {/* Shipping Note */}
-                            <div className="mb-10 flex items-start gap-4 p-5 bg-white border border-amber-100 rounded-2xl shadow-sm">
-                                <Truck className="w-5 h-5 mt-0.5 shrink-0 text-amber-600" />
-                                <p className="text-sm sm:text-base font-normal text-amber-900/80 leading-relaxed">
-                                    {t.shippingNote}
-                                </p>
-                            </div>
-
                             {/* Call to Action Pre-text */}
                             {!typedItem.is_sold && (
                                 <div className="mb-8 text-center">
@@ -243,6 +235,14 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     </div>
                                 </div>
                             )}
+
+                            {/* Shipping Note (at the bottom) */}
+                            <div className="mt-12 flex items-start gap-4 p-5 bg-white border border-amber-100 rounded-2xl shadow-sm">
+                                <Truck className="w-5 h-5 mt-0.5 shrink-0 text-amber-600" />
+                                <p className="text-sm sm:text-base font-normal text-amber-900/80 leading-relaxed text-center w-full">
+                                    {t.shippingNote}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
