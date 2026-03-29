@@ -23,7 +23,7 @@ export async function POST(req: Request) {
             const { error } = await supabase.auth.verifyOtp({
                 email,
                 token,
-                type: 'email',
+                type: 'magiclink',
             });
             authError = error;
         } else {
