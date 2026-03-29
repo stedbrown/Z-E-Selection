@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, MessageCircle, Facebook, Instagram } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Facebook, Instagram, Truck } from 'lucide-react';
 import { Item } from '@/types/item';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -135,6 +135,14 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                         </div>
 
                         <div className="h-px w-full bg-gray-100 mb-8" />
+
+                        {/* Shipping Note */}
+                        <div className="mb-8 flex items-start gap-3 p-4 bg-amber-50/50 border border-amber-100/50 rounded-2xl text-amber-900/80">
+                            <Truck className="w-5 h-5 mt-0.5 shrink-0 text-amber-600/70" />
+                            <p className="text-sm font-medium leading-relaxed">
+                                {t.shippingNote}
+                            </p>
+                        </div>
 
                         {/* Description */}
                         {description && (

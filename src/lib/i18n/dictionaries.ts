@@ -42,7 +42,8 @@ export const dictionaries: Record<string, any> = {
             buyRequest: "Vorrei acquistare o ricevere info su questo articolo.",
             sendEmail: "Invia Richiesta via Email",
             successMessage: "Richiesta inviata con successo! Ti ricontatteremo a breve.",
-            errorMessage: "Errore durante l'invio. Riprova più tardi."
+            errorMessage: "Errore durante l'invio. Riprova più tardi.",
+            shippingNote: "Il prezzo della spedizione verrà concordato al ricevimento dell'ordine in base al paese di acquisto."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -150,7 +151,8 @@ export const dictionaries: Record<string, any> = {
             buyRequest: "I would like to purchase or receive info about this item.",
             sendEmail: "Send Email Request",
             successMessage: "Request sent successfully! We will contact you shortly.",
-            errorMessage: "Error sending request. Please try again later."
+            errorMessage: "Error sending request. Please try again later.",
+            shippingNote: "Shipping costs will be agreed upon receiving the order, based on the country of purchase."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -258,7 +260,8 @@ export const dictionaries: Record<string, any> = {
             buyRequest: "Je souhaite acheter ou recevoir des infos su cet article.",
             sendEmail: "Envoyer la demande par e-mail",
             successMessage: "Demande envoyée avec succès ! Nous vous recontacterons sous peu.",
-            errorMessage: "Erreur lors de l'envoi. Veuillez réessayer plus tard."
+            errorMessage: "Erreur lors de l'envoi. Veuillez réessayer plus tard.",
+            shippingNote: "Les frais d'expédition seront convenus à la réception de la commande, en fonction du pays d'achat."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
@@ -366,7 +369,8 @@ export const dictionaries: Record<string, any> = {
             buyRequest: "Ich möchte diesen Artikel kaufen oder Informationen dazu erhalten.",
             sendEmail: "E-Mail-Anfrage senden",
             successMessage: "Anfrage erfolgreich gesendet! Wir werden uns in Kürze bei Ihnen melden.",
-            errorMessage: "Fehler beim Senden. Bitte versuchen Sie es später noch einmal."
+            errorMessage: "Fehler beim Senden. Bitte versuchen Sie es später noch einmal.",
+            shippingNote: "Die Versandkosten werden nach Erhalt der Bestellung je nach Land des Kaufs vereinbart."
         },
         adminMenu: {
             title: "Z&E Selection Admin",
