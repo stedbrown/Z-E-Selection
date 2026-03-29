@@ -4,7 +4,16 @@ export const dictionaries: Record<string, any> = {
             title: "Z&E Selection",
             footer: "Tutti i diritti riservati.",
             search: "Cerca nel catalogo...",
-            categories: "Sfoglia Categorie"
+            categories: "Sfoglia Categorie",
+            legal: {
+                impressum: "Note Legali / Impressum",
+                privacy: "Privacy Policy",
+                terms: "Termini e Condizioni",
+                companyInfo: "Informazioni Societarie",
+                address: "Sede Legale: Via Lugano 1, 6900 Lugano, Svizzera",
+                vat: "UID: CHE-xxx.xxx.xxx",
+                contact: "Contatti: info@zeselection.ch"
+            }
         },
         home: {
             title: "L'Arte del Tempo, Selezionata per Te",
@@ -114,7 +123,16 @@ export const dictionaries: Record<string, any> = {
             title: "Z&E Selection",
             footer: "All rights reserved.",
             search: "Search catalogue...",
-            categories: "Browse Categories"
+            categories: "Browse Categories",
+            legal: {
+                impressum: "Legal Notice / Impressum",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service",
+                companyInfo: "Company Information",
+                address: "Registered Office: Via Lugano 1, 6900 Lugano, Switzerland",
+                vat: "UID: CHE-xxx.xxx.xxx",
+                contact: "Contact: info@zeselection.ch"
+            }
         },
         home: {
             title: "The Art of Time, Selected for You",
@@ -224,7 +242,16 @@ export const dictionaries: Record<string, any> = {
             title: "Z&E Selection",
             footer: "Tous droits réservés.",
             search: "Chercher dans le catalogue...",
-            categories: "Parcourir les Catégories"
+            categories: "Parcourir les Catégories",
+            legal: {
+                impressum: "Mentions Légales / Impressum",
+                privacy: "Politique de Confidentialité",
+                terms: "Conditions d'Utilisation",
+                companyInfo: "Informations sur l'Entreprise",
+                address: "Siège Social: Via Lugano 1, 6900 Lugano, Suisse",
+                vat: "IDE: CHE-xxx.xxx.xxx",
+                contact: "Contact: info@zeselection.ch"
+            }
         },
         home: {
             title: "L'Art du Temps, Sélectionné pour Vous",
@@ -334,7 +361,16 @@ export const dictionaries: Record<string, any> = {
             title: "Z&E Selection",
             footer: "Alle Rechte vorbehalten.",
             search: "Katalog durchsuchen...",
-            categories: "Kategorien durchsuchen"
+            categories: "Kategorien durchsuchen",
+            legal: {
+                impressum: "Impressum / Rechtliche Hinweise",
+                privacy: "Datenschutzbestimmungen",
+                terms: "AGB",
+                companyInfo: "Unternehmensinformationen",
+                address: "Firmensitz: Via Lugano 1, 6900 Lugano, Schweiz",
+                vat: "UID: CHE-xxx.xxx.xxx",
+                contact: "Kontakt: info@zeselection.ch"
+            }
         },
         home: {
             title: "Die Kunst der Zeit, für Sie ausgewählt",

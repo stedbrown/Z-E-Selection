@@ -75,10 +75,61 @@ export default async function RootLayout({
         </main>
 
         {/* ── Footer ── */}
-        <footer className="mt-20 border-t border-gray-100 bg-white/60">
-          <div className="container mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <Logo className="text-base" />
-            <p>&copy; {new Date().getFullYear()} Z&amp;E Selection. {t.footer}</p>
+        <footer className="mt-20 border-t border-gray-100 bg-white/60 pt-16 pb-8">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+              {/* Column 1: Brand */}
+              <div className="space-y-4">
+                <Logo className="text-2xl" />
+                <p className="text-sm text-gray-500 max-w-xs leading-relaxed">
+                  {lang === 'it' ? "Galleria d'antiquariato e mercatino dell'usato selezionato con cura da Zuhad & Ema." : 
+                   lang === 'en' ? "Antique gallery and flea market curated with care by Zuhad & Ema." :
+                   lang === 'fr' ? "Galerie d'antiquités et marché aux puces sélectionnés avec soin par Zuhad & Ema." :
+                   "Antiquitätengalerie und Flohmarkt, mit Sorgfalt kuratiert von Zuhad & Ema."}
+                </p>
+              </div>
+
+              {/* Column 2: Legal Info (Swiss Impressum) */}
+              <div className="space-y-4">
+                <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#B49E78]">{t.legal?.companyInfo || 'Legal'}</h3>
+                <ul className="text-sm text-gray-500 space-y-2.5 leading-relaxed">
+                  <li className="font-medium text-gray-900">Z&E Selection</li>
+                  <li>{t.legal?.address}</li>
+                  <li>{t.legal?.vat}</li>
+                  <li>{t.legal?.contact}</li>
+                </ul>
+              </div>
+
+              {/* Column 3: Quick Links */}
+              <div className="space-y-4">
+                <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#B49E78]">{lang === 'it' ? 'Link Utili' : 'Links'}</h3>
+                <ul className="text-sm text-gray-500 space-y-2.5">
+                  <li>
+                    <Link href="/about" className="hover:text-[#B49E78] transition-colors">{lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'}</Link>
+                  </li>
+                  <li>
+                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.impressum}</button>
+                  </li>
+                  <li>
+                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.privacy}</button>
+                  </li>
+                  <li>
+                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.terms}</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="pt-8 border-t border-gray-50 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-400 font-medium tracking-wide">
+              <p>&copy; {new Date().getFullYear()} Z&amp;E Selection. {t.footer}</p>
+              <div className="flex items-center gap-6">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
+                  Svizzera / Switzerland
+                </span>
+              </div>
+            </div>
           </div>
         </footer>
       </body>
