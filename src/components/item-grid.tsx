@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { ItemCard } from '@/components/item-card';
+import { ItemCardSkeleton } from '@/components/item-card-skeleton';
 import { Item } from '@/types/item';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -170,7 +171,7 @@ export function ItemGrid({ items: initialItems, categories, categorySlugs, categ
 
     const filtered = items;
 
-    if (initialItems.length === 0 && !activeCategory) {
+    if (initialItems.length === 0 && !activeCategory && !loading) {
         return (
             <div className="text-center py-24 text-gray-500">
                 <p className="text-xl font-serif">{t.empty}</p>
@@ -216,32 +217,37 @@ export function ItemGrid({ items: initialItems, categories, categorySlugs, categ
             </div>
 
             {/* Results */}
-            {filtered.length === 0 ? (
+            {filtered.length === 0 && !loading ? (
                 <div className="text-center py-24 text-gray-400">
-                    {loading ? (
-                        <Loader2 className="w-10 h-10 mx-auto mb-4 animate-spin text-gold/40" />
-                    ) : (
-                        <Search className="w-10 h-10 mx-auto mb-4 opacity-40" />
-                    )}
-                    <p className="text-lg font-serif">{loading ? '...' : t.noResults}</p>
+                    <Search className="w-10 h-10 mx-auto mb-4 opacity-40" />
+                    <p className="text-lg font-serif">{t.noResults}</p>
                 </div>
             ) : (
                 <>
                     <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+                        {/* Real Items */}
                         {filtered.map(item => (
                             <ItemCard key={item.id} item={item} lang={lang} />
                         ))}
+
+                        {/* Loading Skeletons */}
+                        {loading && (
+                            <>
+                                {[...Array(filtered.length === 0 ? 8 : 4)].map((_, i) => (
+                                    <ItemCardSkeleton key={`skeleton-${i}`} />
+                                ))}
+                            </>
+                        )}
                     </div>
 
                     {/* Load More Button */}
-                    {hasMore && (
+                    {hasMore && !loading && (
                         <div className="mt-20 flex justify-center">
                             <button
                                 onClick={loadMore}
                                 disabled={loading}
                                 className="px-10 py-3 border border-gold/30 text-gold-dark rounded-full font-medium hover:bg-gold/5 transition-all flex items-center gap-3 disabled:opacity-50"
                             >
-                                {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                                 {t.loadMore}
                             </button>
                         </div>
