@@ -134,121 +134,135 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                             </p>
                         </div>
 
-                        <div className="h-px w-full bg-gray-100 mb-8" />
-
-                        {/* Shipping Note */}
-                        <div className="mb-8 flex items-start gap-3 p-4 bg-amber-50/50 border border-amber-100/50 rounded-2xl text-amber-900/80">
-                            <Truck className="w-5 h-5 mt-0.5 shrink-0 text-amber-600/70" />
-                            <p className="text-sm font-medium leading-relaxed">
-                                {t.shippingNote}
-                            </p>
-                        </div>
-
                         {/* Description */}
                         {description && (
-                            <div className="mb-8 prose prose-gray max-w-none">
+                            <div className="prose prose-gray max-w-none">
                                 <p className="whitespace-pre-wrap text-gray-600 leading-relaxed text-[15px] sm:text-base font-light">
                                     {description}
                                 </p>
                             </div>
                         )}
+                    </div>
 
-                        {/* Call to Action Pre-text */}
-                        {!typedItem.is_sold && (
-                            <div className="mb-6 p-5 bg-[#faf9f7] rounded-2xl border border-gray-100">
-                                <h3 className="text-sm font-semibold text-gray-900 tracking-wide uppercase mb-2">
-                                    {lang === 'it' ? 'Ti interessa questo articolo?' : lang === 'en' ? 'Interested in this item?' : lang === 'fr' ? 'Cet article vous intéresse ?' : 'Interessiert an diesem Artikel?'}
-                                </h3>
-                                <p className="text-sm text-gray-500 font-light leading-relaxed">
-                                    {lang === 'it' ? 'Contattaci senza impegno per maggiori informazioni o per procedere all\'acquisto.' : lang === 'en' ? 'Contact us without obligation for more information or to proceed with the purchase.' : lang === 'fr' ? 'Contactez-nous sans engagement pour plus d\'informations ou pour procéder à l\'achat.' : 'Kontaktieren Sie uns unverbindlich für weitere Informationen oder um mit dem Kauf fortzufahren.'}
+                    {/* Contact & Shipping Notes Section (Full Width on Desktop) */}
+                    <div className="lg:col-span-2 px-5 py-10 md:px-10 lg:px-16 md:py-16 bg-[#faf9f7]/50 border-t border-gray-100">
+                        <div className="max-w-3xl mx-auto">
+                            {/* Shipping Note */}
+                            <div className="mb-10 flex items-start gap-4 p-5 bg-white border border-amber-100 rounded-2xl shadow-sm">
+                                <Truck className="w-5 h-5 mt-0.5 shrink-0 text-amber-600" />
+                                <p className="text-sm sm:text-base font-normal text-amber-900/80 leading-relaxed">
+                                    {t.shippingNote}
                                 </p>
                             </div>
-                        )}
 
-                    {/* Sold banner or CTA Actions */}
-                    {typedItem.is_sold ? (
-                        <div className="flex flex-col gap-3 w-full">
-                            <div className="flex-1 text-center py-4 bg-gray-100 text-gray-500 font-medium rounded-xl border border-gray-200 text-sm tracking-wide uppercase">
-                                {t.soldOutMessage}
-                            </div>
-                            {/* Social Share Row */}
-                            <div className="grid grid-cols-3 gap-3 w-full">
-                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
-                                    <span className="hidden sm:inline">Facebook</span>
-                                </a>
-                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
-                                    <span className="hidden sm:inline">Instagram</span>
-                                </a>
-                                <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
-                                    <ShareButton 
-                                        title={title}
-                                        text={description}
-                                        url={`https://www.zeselection.ch/item/${typedItem.id}`}
-                                        label={t.share}
-                                        copiedLabel=""
-                                    />
+                            {/* Call to Action Pre-text */}
+                            {!typedItem.is_sold && (
+                                <div className="mb-8 text-center">
+                                    <h3 className="text-lg font-serif font-medium text-gray-900 tracking-wide mb-3">
+                                        {lang === 'it' ? 'Ti interessa questo articolo?' : lang === 'en' ? 'Interested in this item?' : lang === 'fr' ? 'Cet article vous intéresse ?' : 'Interessiert an diesem Artikel?'}
+                                    </h3>
+                                    <p className="text-sm sm:text-base text-gray-500 font-light leading-relaxed max-w-xl mx-auto">
+                                        {lang === 'it' ? 'Contattaci senza impegno per maggiori informazioni o per procedere all\'acquisto.' : lang === 'en' ? 'Contact us without obligation for more information or to proceed with the purchase.' : lang === 'fr' ? 'Contactez-nous sans engagement pour plus d\'informations ou pour procéder à l\'achat.' : 'Kontaktieren Sie uns unverbindlich für weitere Informationen oder um mit dem Kauf fortzufahren.'}
+                                    </p>
                                 </div>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex flex-col gap-6 w-full">
-                            {/* Primary WhatsApp Contact */}
-                            <a
-                                href={whatsappUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center h-[54px] px-2 sm:px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold rounded-xl transition-all shadow-md gap-3 text-base"
-                            >
-                                <MessageCircle className="w-5 h-5 text-white shrink-0" />
-                                <span>{t.whatsapp}</span>
-                            </a>
+                            )}
 
-                            {/* Detailed Email Contact Form */}
-                            <ContactForm itemId={typedItem.id} t={t} />
-                            
-                            {/* Social Share Row */}
-                            <div className="grid grid-cols-3 gap-3 w-full">
-                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
-                                    <span className="hidden sm:inline">Facebook</span>
-                                </a>
-                                <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                    <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
-                                    <span className="hidden sm:inline">Instagram</span>
-                                </a>
-                                <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
-                                    <ShareButton 
-                                        title={title}
-                                        text={description}
-                                        url={`https://www.zeselection.ch/item/${typedItem.id}`}
-                                        label={t.share}
-                                        copiedLabel=""
-                                    />
+                            {/* Sold banner or CTA Actions */}
+                            {typedItem.is_sold ? (
+                                <div className="flex flex-col gap-4 w-full">
+                                    <div className="text-center py-5 bg-gray-100 text-gray-500 font-medium rounded-xl border border-gray-200 text-sm tracking-wide uppercase">
+                                        {t.soldOutMessage}
+                                    </div>
+                                    {/* Social Share Row */}
+                                    <div className="grid grid-cols-3 gap-3 w-full">
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                            <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
+                                            <span className="hidden sm:inline">Facebook</span>
+                                        </a>
+                                        <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                            <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
+                                            <span className="hidden sm:inline">Instagram</span>
+                                        </a>
+                                        <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
+                                            <ShareButton 
+                                                title={title}
+                                                text={description}
+                                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                                label={t.share}
+                                                copiedLabel=""
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="flex flex-col gap-8 w-full">
+                                    {/* Primary WhatsApp Contact */}
+                                    <a
+                                        href={whatsappUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center h-[60px] px-6 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 gap-3 text-lg"
+                                    >
+                                        <MessageCircle className="w-6 h-6 text-white shrink-0" />
+                                        <span>{t.whatsapp}</span>
+                                    </a>
+
+                                    <div className="relative">
+                                        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                            <div className="w-full border-t border-gray-100"></div>
+                                        </div>
+                                        <div className="relative flex justify-center text-xs uppercase tracking-widest text-gray-300 font-medium">
+                                            <span className="bg-[#faf9f7] px-4">{lang === 'it' ? 'Oppure scrivici' : lang === 'en' ? 'Or write to us' : lang === 'fr' ? 'Ou écrivez-nous' : 'Oder schreiben Sie uns'}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Detailed Email Contact Form */}
+                                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
+                                        <ContactForm itemId={typedItem.id} t={t} />
+                                    </div>
+                                    
+                                    {/* Social Share Row */}
+                                    <div className="grid grid-cols-3 gap-3 w-full">
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                            <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
+                                            <span className="hidden sm:inline">Facebook</span>
+                                        </a>
+                                        <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                            <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
+                                            <span className="hidden sm:inline">Instagram</span>
+                                        </a>
+                                        <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
+                                            <ShareButton 
+                                                title={title}
+                                                text={description}
+                                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                                label={t.share}
+                                                copiedLabel=""
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
 
-                {/* Related Items Section */}
-                {relatedItems.length > 0 && (
-                    <div className="mt-20 md:mt-24 px-5 md:px-0">
-                        <div className="border-t border-gray-200 pt-16">
-                            <h2 className="text-2xl font-serif font-medium text-gray-900 mb-8">
-                                {lang === 'it' ? 'Potrebbe interessarti anche' : lang === 'en' ? 'You might also like' : lang === 'fr' ? 'Vous aimerez peut-être aussi' : 'Das könnte dir auch gefallen'}
-                            </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
-                                {relatedItems.map((relatedItem) => (
-                                    <ItemCard key={relatedItem.id} item={relatedItem} lang={lang} />
-                                ))}
-                            </div>
+            {/* Related Items Section */}
+            {relatedItems.length > 0 && (
+                <div className="mt-20 md:mt-24 px-5 md:px-0">
+                    <div className="border-t border-gray-200 pt-16 max-w-7xl mx-auto px-8">
+                        <h2 className="text-2xl font-serif font-medium text-gray-900 mb-8">
+                            {lang === 'it' ? 'Potrebbe interessarti anche' : lang === 'en' ? 'You might also like' : lang === 'fr' ? 'Vous aimerez peut-être aussi' : 'Das könnte dir auch gefallen'}
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+                            {relatedItems.map((relatedItem) => (
+                                <ItemCard key={relatedItem.id} item={relatedItem} lang={lang} />
+                            ))}
                         </div>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 }
