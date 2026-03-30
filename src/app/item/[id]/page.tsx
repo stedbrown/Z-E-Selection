@@ -62,6 +62,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
     supabase.rpc('increment_item_views', { item_id: id }).then();
 
     const typedItem = item as Item;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.ch';
 
     const cookieStore = await cookies();
     const lang = (cookieStore.get('NEXT_LOCALE')?.value || 'it') as 'it' | 'en' | 'fr' | 'de';
@@ -167,7 +168,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     </div>
                                     {/* Social Share Row */}
                                     <div className="grid grid-cols-3 gap-3 w-full">
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${baseUrl}/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
                                             <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
                                             <span className="hidden sm:inline">Facebook</span>
                                         </a>
@@ -179,7 +180,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                             <ShareButton 
                                                 title={title}
                                                 text={description}
-                                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                                url={`${baseUrl}/item/${typedItem.id}`}
                                                 label={t.share}
                                                 copiedLabel=""
                                             />
@@ -215,7 +216,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     
                                     {/* Social Share Row */}
                                     <div className="grid grid-cols-3 gap-3 w-full">
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.zeselection.ch/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${baseUrl}/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
                                             <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
                                             <span className="hidden sm:inline">Facebook</span>
                                         </a>
@@ -227,7 +228,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                             <ShareButton 
                                                 title={title}
                                                 text={description}
-                                                url={`https://www.zeselection.ch/item/${typedItem.id}`}
+                                                url={`${baseUrl}/item/${typedItem.id}`}
                                                 label={t.share}
                                                 copiedLabel=""
                                             />
