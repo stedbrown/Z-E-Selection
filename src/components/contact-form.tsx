@@ -61,109 +61,105 @@ export function ContactForm({ itemId, t }: ContactFormProps) {
     }
 
     return (
-        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-            <div className="p-5 border-b border-gray-50 bg-[#faf9f7]/50">
-                <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-gray-400" />
+        <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+            <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-900 tracking-[0.15em] uppercase flex items-center gap-2.5">
+                    <Mail className="w-4 h-4 text-[#B49E78] shrink-0" />
                     {t.contactTitle}
                 </h3>
             </div>
             
-            <form action={handleSubmit} className="p-5 space-y-4">
+            <form action={handleSubmit} className="space-y-6">
                 <input type="hidden" name="itemId" value={itemId} />
                 
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Nome e Cognome */}
-                    <div className="space-y-1.5">
-                        <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
+                    <div className="space-y-2 md:col-span-2">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
                             {t.fullName} *
                         </label>
                         <input
                             required
                             name="name"
                             placeholder="es. Mario Rossi"
-                            className="w-full h-12 px-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none"
+                            className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Telefono */}
-                        <div className="space-y-1.5">
-                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
-                                {t.phoneNumber}
-                            </label>
-                            <input
-                                name="phone"
-                                type="tel"
-                                placeholder="+41 ..."
-                                className="w-full h-12 px-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none"
-                            />
-                        </div>
-                        {/* Paese / Nazione */}
-                        <div className="space-y-1.5">
-                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
-                                {t.nation}
-                            </label>
-                            <input
-                                name="country"
-                                placeholder="es. Svizzera"
-                                className="w-full h-12 px-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Indirizzo + Città & Cap */}
-                    <div className="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100/50">
-                        <div className="space-y-1.5">
-                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
-                                {t.address}
-                            </label>
-                            <input
-                                name="address"
-                                placeholder="Via e numero civico"
-                                className="w-full px-0 bg-transparent border-b border-gray-200 focus:border-gray-900 text-sm transition-all outline-none pb-1"
-                            />
-                        </div>
-                        <div className="space-y-1.5">
-                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
-                                {t.country}
-                            </label>
-                            <input
-                                name="city"
-                                placeholder="Città, CAP"
-                                className="w-full px-0 bg-transparent border-b border-gray-200 focus:border-gray-900 text-sm transition-all outline-none pb-1"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Messaggio / Note */}
-                    <div className="space-y-1.5">
-                        <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
-                            {t.message}
+                    {/* Telefono */}
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                            {t.phoneNumber}
                         </label>
-                        <textarea
-                            name="message"
-                            rows={3}
-                            placeholder="Scrivi qui eventuali domande o note aggiuntive..."
-                            className="w-auto min-h-[100px] w-full p-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none resize-none"
+                        <input
+                            name="phone"
+                            type="tel"
+                            placeholder="+41 ..."
+                            className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
+                        />
+                    </div>
+
+                    {/* Paese / Nazione */}
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                            {t.nation}
+                        </label>
+                        <input
+                            name="country"
+                            placeholder="es. Svizzera"
+                            className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
+                        />
+                    </div>
+
+                    {/* Indirizzo + Città & Cap (Piatto) */}
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                            {t.address}
+                        </label>
+                        <input
+                            name="address"
+                            placeholder="Via e numero civico"
+                            className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                            {t.country}
+                        </label>
+                        <input
+                            name="city"
+                            placeholder="Città, CAP"
+                            className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
                         />
                     </div>
                 </div>
 
-                <div className="pt-2">
+                {/* Messaggio / Note */}
+                <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                        {t.message}
+                    </label>
+                    <textarea
+                        name="message"
+                        rows={3}
+                        placeholder="Scrivi qui eventuali domande o note aggiuntive..."
+                        className="w-full min-h-[120px] p-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none resize-none shadow-sm"
+                    />
+                </div>
+
+                <div className="pt-4 px-2">
                     <SubmitButton label={t.sendEmail} />
+                    <p className="mt-4 text-[10px] text-gray-400 text-center leading-relaxed font-light tracking-wide italic">
+                        Premendo invia confermi di voler essere ricontattato via email o telefono per questo articolo specifico. 
+                    </p>
                 </div>
 
                 {state === 'error' && (
-                    <div className="flex items-center gap-2 text-red-500 text-xs mt-2 justify-center">
+                    <div className="flex items-center gap-2 text-red-500 text-xs mt-3 justify-center bg-red-50/50 p-3 rounded-xl border border-red-100/50">
                         <AlertCircle className="w-4 h-4" />
                         <span>{t.errorMessage}</span>
                     </div>
                 )}
-
-                <p className="text-[10px] text-gray-400 text-center leading-relaxed">
-                    Premendo invia confermi di voler essere ricontattato via email o telefono per questo articolo specifico. 
-                </p>
             </form>
         </div>
     );

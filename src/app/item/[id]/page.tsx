@@ -210,9 +210,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     </div>
 
                                     {/* Detailed Email Contact Form */}
-                                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
-                                        <ContactForm itemId={typedItem.id} t={t} />
-                                    </div>
+                                    <ContactForm itemId={typedItem.id} t={t} />
                                     
                                     {/* Social Share Row */}
                                     <div className="grid grid-cols-3 gap-3 w-full">
