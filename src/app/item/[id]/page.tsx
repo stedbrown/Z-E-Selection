@@ -21,25 +21,39 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
     if (!item) return {};
 
-    const desc = item.description?.substring(0, 160) || `${item.title} — Z&E Selection`;
+    // Get current locale for translated metadata
+    const cookieStore = await cookies();
+    const lang = (cookieStore.get('NEXT_LOCALE')?.value || 'it') as 'it' | 'en' | 'fr' | 'de';
+    
+    const title = lang === 'it' ? item.title : (item.translations?.[lang]?.title || item.title);
+    const description = lang === 'it' ? item.description : (item.translations?.[lang]?.description || item.description);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.ch';
+    const itemUrl = `${baseUrl}/item/${item.id}`;
+
+    const desc = description?.substring(0, 160) || `${title} — Z&E Selection`;
     const ogImages = [
-        { url: item.image_url, width: 1200, height: 630, alt: item.title },
+        { url: item.image_url, width: 1200, height: 630, alt: title },
         ...(item.extra_images || []).slice(0, 3).map((url: string) => ({ url, width: 1200, height: 630 })),
     ];
 
     return {
-        title: `${item.title} | Z&E Selection`,
+        title: `${title} | Z&E Selection`,
         description: desc,
+        alternates: {
+            canonical: itemUrl,
+        },
         openGraph: {
-            title: `${item.title} | Z&E Selection`,
+            title: `${title} | Z&E Selection`,
             description: desc,
+            url: itemUrl,
             images: ogImages,
             type: 'website',
             siteName: 'Z&E Selection',
+            locale: lang === 'it' ? 'it_IT' : lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : 'de_DE',
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${item.title} | Z&E Selection`,
+            title: `${title} | Z&E Selection`,
             description: desc,
             images: [item.image_url],
         },
