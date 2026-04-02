@@ -22,8 +22,22 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.zeselection.com'),
   title: "Z&E Selection | Antiquariato & Usato di Qualità",
   description: "Galleria d'antiquariato e mercatino dell'usato. Scopri pezzi unici e vintage selezionati con cura da Zuhad & Ema.",
+  openGraph: {
+    title: "Z&E Selection | Antiquariato & Usato di Qualità",
+    description: "Esposizione privata di articoli antichi, rari e modernariato. Scopri pezzi unici e vintage selezionati con cura.",
+    url: 'https://www.zeselection.com',
+    siteName: 'Z&E Selection',
+    locale: 'it_CH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Z&E Selection | Antiquariato & Usato di Qualità",
+    description: "Esposizione privata di articoli antichi, rari e modernariato.",
+  },
 };
 
 export default async function RootLayout({

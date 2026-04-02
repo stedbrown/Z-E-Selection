@@ -8,8 +8,50 @@ import { ChevronLeft } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
+import { Metadata } from 'next';
+
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const supabase = await createClient();
+  const { data: category } = await supabase.from('categories').select('name, translations').eq('slug', slug).single();
+
+  if (!category) return {};
+
+  const cookieStore = await cookies();
+  const lang = cookieStore.get('NEXT_LOCALE')?.value || 'it';
+  
+  let translatedName = category.name;
+  if (lang !== 'it' && category.translations && category.translations[lang]) {
+    translatedName = category.translations[lang];
+  }
+
+  const title = `${translatedName} | Z&E Selection`;
+  const description = `Scopri la nostra selezione di articoli per la categoria ${translatedName}. Antiquariato e usato di qualità.`;
+  const url = `https://www.zeselection.com/category/${slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      siteName: 'Z&E Selection',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
