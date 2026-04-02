@@ -91,7 +91,7 @@ export default async function RootLayout({
         {/* ── Footer ── */}
         <footer className="mt-20 border-t border-gray-100 bg-white/60 pt-16 pb-8">
           <div className="container mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mb-12">
               {/* Column 1: Brand */}
               <div className="space-y-4">
                 <Logo className="text-2xl" />
@@ -101,6 +101,19 @@ export default async function RootLayout({
                    lang === 'fr' ? "Galerie d'antiquités et marché aux puces sélectionnés avec soin par Zuhad & Ema." :
                    "Antiquitätengalerie und Flohmarkt, mit Sorgfalt kuratiert von Zuhad & Ema."}
                 </p>
+              </div>
+
+              {/* Column 2: Contacts */}
+              <div className="space-y-4">
+                <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#B49E78]">{lang === 'it' ? 'Contatti' : lang === 'en' ? 'Contact' : lang === 'fr' ? 'Contact' : 'Kontakt'}</h3>
+                <ul className="text-sm text-gray-500 space-y-2.5">
+                  <li>
+                    <a href="mailto:info@zeselection.com" className="hover:text-[#B49E78] transition-colors">info@zeselection.com</a>
+                  </li>
+                  <li className="text-gray-400">
+                    Biasca (Ticino), Svizzera
+                  </li>
+                </ul>
               </div>
 
               {/* Column 3: Quick Links */}

@@ -53,7 +53,7 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Invia Richiesta via Email",
             successMessage: "Richiesta inviata con successo! Ti ricontatteremo a breve.",
             errorMessage: "Errore durante l'invio. Riprova più tardi.",
-            shippingNote: "Il prezzo della spedizione verrà concordato al ricevimento dell'ordine in base al paese di acquisto.",
+            shippingNote: "Spedito dalla Svizzera. Spese doganali, tasse o dazi di importazione sono a carico dell'acquirente. Il prezzo di spedizione verrà concordato in base alla destinazione.",
             message: "Messaggio / Note"
         },
         adminMenu: {
@@ -173,7 +173,7 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Send Email Request",
             successMessage: "Request sent successfully! We will contact you shortly.",
             errorMessage: "Error sending request. Please try again later.",
-            shippingNote: "Shipping costs will be agreed upon receiving the order, based on the country of purchase.",
+            shippingNote: "Shipped from Switzerland. Customs fees, taxes, or import duties are the buyer's responsibility. Shipping cost agreed upon based on destination.",
             message: "Message / Notes"
         },
         adminMenu: {
@@ -293,7 +293,7 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "Envoyer la demande par e-mail",
             successMessage: "Demande envoyée avec succès ! Nous vous recontacterons sous peu.",
             errorMessage: "Erreur lors de l'envoi. Veuillez réessayer plus tard.",
-            shippingNote: "Les frais d'expédition seront convenus à la réception de la commande, en fonction du pays d'achat.",
+            shippingNote: "Expédié depuis la Suisse. Les frais de douane, taxes ou droits d'importation sont à la charge de l'acheteur. Frais de port convenus selon la destination.",
             message: "Message / Notes"
         },
         adminMenu: {
@@ -413,7 +413,7 @@ export const dictionaries: Record<string, any> = {
             sendEmail: "E-Mail-Anfrage senden",
             successMessage: "Anfrage erfolgreich gesendet! Wir werden uns in Kürze bei Ihnen melden.",
             errorMessage: "Fehler beim Senden. Bitte versuchen Sie es später noch einmal.",
-            shippingNote: "Die Versandkosten werden nach Erhalt der Bestellung je nach Land des Kaufs vereinbart.",
+            shippingNote: "Versand aus der Schweiz. Zollgebühren, Steuern oder Einfuhrabgaben gehen zu Lasten des Käufers. Versandkosten werden nach Bestimmungsort vereinbart.",
             message: "Nachricht / Notizen"
         },
         adminMenu: {
