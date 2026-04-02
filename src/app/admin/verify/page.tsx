@@ -15,7 +15,6 @@ function VerifyContent() {
 
     const [redirecting, setRedirecting] = useState(false);
     const [error, setError] = useState('');
-    const [token, setToken] = useState('');
     const [email, setEmail] = useState(emailFromUrl);
     const [autoVerifying, setAutoVerifying] = useState(!!tokenHash);
 
@@ -86,94 +85,28 @@ function VerifyContent() {
         );
     }
 
-    const handleVerifyPin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setRedirecting(true);
-        setError('');
-        try {
-            const res = await fetch('/api/admin/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, token })
-            });
 
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || 'Codice non valido o scaduto.');
-            }
-
-            window.location.href = '/admin';
-        } catch (err: any) {
-            setError(err.message);
-            setRedirecting(false);
-        }
-    };
 
     return (
-        <div className="animate-in slide-in-from-bottom-4 duration-500">
-            <Link href="/admin/login" className="inline-flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-widest mb-8 hover:text-black transition-colors">
+        <div className="animate-in slide-in-from-bottom-4 duration-500 text-center py-8">
+            <div className="w-20 h-20 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <Mail className="w-10 h-10" />
+            </div>
+
+            <h1 className="text-3xl font-serif font-medium text-gray-900 mb-4">Controlla l'email</h1>
+            <p className="text-gray-500 font-light text-base leading-relaxed max-w-sm mx-auto mb-8">
+                Ti abbiamo inviato un link di accesso sicuro all'indirizzo <br />
+                <span className="font-medium text-gray-900">{emailFromUrl || 'indicato'}</span>.
+            </p>
+            
+            <p className="text-xs text-gray-400 max-w-xs mx-auto italic mb-10">
+                Clicca sul link presente nell'email per accedere automaticamente. Questa pagina si aggiornerà da sola.
+            </p>
+
+            <Link href="/admin/login" className="inline-flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-widest hover:text-black transition-colors">
                 <ArrowLeft className="w-3 h-3" />
                 Torna indietro
             </Link>
-
-            <div className="text-center mb-8">
-                <h1 className="text-3xl font-serif font-medium text-gray-900 mb-3">Inserisci il Codice</h1>
-                <p className="text-gray-500 font-light text-sm">
-                    Ti abbiamo inviato un codice a 6 cifre via email a <br />
-                    <span className="font-medium text-gray-900">{emailFromUrl || 'questo indirizzo'}</span>.
-                </p>
-            </div>
-
-            {error && (
-                <div className="mb-6 p-4 bg-red-50/50 border border-red-100 text-red-600 rounded-2xl text-sm flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                    {error}
-                </div>
-            )}
-
-            <form onSubmit={handleVerifyPin} className="space-y-6 text-left">
-                {!emailFromUrl && (
-                    <div className="space-y-2">
-                        <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                        <Input
-                            type="email"
-                            required
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            className="h-12 bg-gray-50/50 border-gray-100 rounded-xl"
-                        />
-                    </div>
-                )}
-                <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-widest ml-1 text-center">Codice OTP</label>
-                    <Input
-                        type="text"
-                        required
-                        value={token}
-                        onChange={e => setToken(e.target.value)}
-                        placeholder="000000"
-                        className="h-16 text-3xl text-center tracking-[0.4em] font-mono rounded-2xl bg-gray-50/50 border-gray-100 focus:ring-black focus:border-black transition-all"
-                        maxLength={6}
-                    />
-                </div>
-                <Button type="submit" className="w-full h-14 bg-black hover:bg-gray-800 text-white rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2" disabled={redirecting}>
-                    {redirecting ? (
-                        <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            <span>Verifica in corso...</span>
-                        </>
-                    ) : (
-                        <>
-                            <ShieldCheck className="w-5 h-5" />
-                            <span>Verifica Accesso</span>
-                        </>
-                    )}
-                </Button>
-            </form>
-            
-            <p className="mt-8 text-center text-xs text-gray-400">
-                Non hai ricevuto nulla? Controlla la cartella Spam o <Link href="/admin/login" className="text-black font-medium hover:underline">riprova ad inviare</Link>.
-            </p>
         </div>
     );
 }
