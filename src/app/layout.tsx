@@ -97,13 +97,13 @@ export default async function RootLayout({
                     <Link href="/about" className="hover:text-[#B49E78] transition-colors">{lang === 'it' ? 'Chi Siamo' : lang === 'en' ? 'About Us' : lang === 'fr' ? 'À Propos' : 'Über Uns'}</Link>
                   </li>
                   <li>
-                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.impressum}</button>
+                    <Link href="/legal/impressum" className="hover:text-[#B49E78] transition-colors block text-left">{t.legal?.impressum || 'Note Legali / Impressum'}</Link>
                   </li>
                   <li>
-                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.privacy}</button>
+                    <Link href="/legal/privacy" className="hover:text-[#B49E78] transition-colors block text-left">{t.legal?.privacy || 'Privacy Policy'}</Link>
                   </li>
                   <li>
-                    <button className="hover:text-[#B49E78] transition-colors text-left">{t.legal?.terms}</button>
+                    <Link href="/legal/terms" className="hover:text-[#B49E78] transition-colors block text-left">{t.legal?.terms || 'Termini e Condizioni'}</Link>
                   </li>
                 </ul>
               </div>
