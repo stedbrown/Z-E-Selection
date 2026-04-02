@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     
     const title = lang === 'it' ? item.title : (item.translations?.[lang]?.title || item.title);
     const description = lang === 'it' ? item.description : (item.translations?.[lang]?.description || item.description);
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.ch';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.com';
     const itemUrl = `${baseUrl}/item/${item.id}`;
 
     const desc = description?.substring(0, 160) || `${title} — Z&E Selection`;
@@ -76,7 +76,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
     supabase.rpc('increment_item_views', { item_id: id }).then();
 
     const typedItem = item as Item;
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.ch';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.zeselection.com';
 
     const cookieStore = await cookies();
     const lang = (cookieStore.get('NEXT_LOCALE')?.value || 'it') as 'it' | 'en' | 'fr' | 'de';

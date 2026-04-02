@@ -12,7 +12,7 @@ export const dictionaries: Record<string, any> = {
                 companyInfo: "Informazioni Societarie",
                 address: "Sede Legale: Via Lugano 1, 6900 Lugano, Svizzera",
                 vat: "UID: CHE-xxx.xxx.xxx",
-                contact: "Contatti: info@zeselection.ch"
+                contact: "Contatti: info@zeselection.com"
             }
         },
         home: {
@@ -132,7 +132,7 @@ export const dictionaries: Record<string, any> = {
                 companyInfo: "Company Information",
                 address: "Registered Office: Via Lugano 1, 6900 Lugano, Switzerland",
                 vat: "UID: CHE-xxx.xxx.xxx",
-                contact: "Contact: info@zeselection.ch"
+                contact: "Contact: info@zeselection.com"
             }
         },
         home: {
@@ -252,7 +252,7 @@ export const dictionaries: Record<string, any> = {
                 companyInfo: "Informations sur l'Entreprise",
                 address: "Siège Social: Via Lugano 1, 6900 Lugano, Suisse",
                 vat: "IDE: CHE-xxx.xxx.xxx",
-                contact: "Contact: info@zeselection.ch"
+                contact: "Contact: info@zeselection.com"
             }
         },
         home: {
@@ -372,7 +372,7 @@ export const dictionaries: Record<string, any> = {
                 companyInfo: "Unternehmensinformationen",
                 address: "Firmensitz: Via Lugano 1, 6900 Lugano, Schweiz",
                 vat: "UID: CHE-xxx.xxx.xxx",
-                contact: "Kontakt: info@zeselection.ch"
+                contact: "Kontakt: info@zeselection.com"
             }
         },
         home: {
