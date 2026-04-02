@@ -13,28 +13,13 @@ export async function submitContactForm(formData: FormData) {
     const phone = formData.get('phone') as string;
     const address = formData.get('address') as string;
     const country = formData.get('country') as string;
-<<<<<<< Updated upstream
     const message = formData.get('message') as string;
-=======
     const city = formData.get('city') as string;
->>>>>>> Stashed changes
 
     if (!name || !email || !itemId) {
         return { error: 'Name, Email and Item ID are required' };
     }
 
-<<<<<<< Updated upstream
-    const { error } = await supabase
-        .from('contacts')
-        .insert({
-            item_id: itemId,
-            name,
-            phone,
-            address,
-            country,
-            message,
-            status: 'pending'
-=======
     try {
         const { error: dbError } = await supabase
             .from('contacts')
@@ -45,6 +30,7 @@ export async function submitContactForm(formData: FormData) {
                 phone,
                 address,
                 country,
+                message, // Added message from upstream
                 status: 'pending'
             });
 
@@ -65,7 +51,6 @@ export async function submitContactForm(formData: FormData) {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS
             }
->>>>>>> Stashed changes
         });
 
         // Optional city included in the address line
