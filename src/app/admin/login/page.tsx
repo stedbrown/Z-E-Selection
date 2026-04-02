@@ -10,11 +10,7 @@ import { Mail, ArrowRight, Lock, AlertCircle } from 'lucide-react';
 // Inserisci qui le email che possono accedere all'area admin.
 // Le altre verranno bloccate istantaneamente senza consumare la quota email di Supabase.
 const ALLOWED_ADMINS = [
-    'stefanovananti@icloud.com',
-    'emanuele.novara77@gmail.com',
-    'stefanovananti@gmail.com',
-    'stefano.vananti@gmail.com',
-    'admin@zeselection.com'
+    'info@zeselection.com'
 ];
 
 export default function LoginPage() {
