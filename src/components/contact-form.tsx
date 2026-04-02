@@ -72,6 +72,7 @@ export function ContactForm({ itemId, t }: ContactFormProps) {
             <form action={handleSubmit} className="space-y-6">
                 <input type="hidden" name="itemId" value={itemId} />
                 
+<<<<<<< Updated upstream
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Nome e Cognome */}
                     <div className="space-y-2 md:col-span-2">
@@ -84,6 +85,36 @@ export function ContactForm({ itemId, t }: ContactFormProps) {
                             placeholder="es. Mario Rossi"
                             className="w-full h-14 px-5 bg-white border border-gray-100 focus:border-[#B49E78] focus:ring-1 focus:ring-[#B49E78]/5 rounded-2xl text-sm transition-all outline-none shadow-sm"
                         />
+=======
+                <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Nome e Cognome */}
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
+                                {t.fullName} *
+                            </label>
+                            <input
+                                required
+                                name="name"
+                                placeholder="es. Mario Rossi"
+                                className="w-full h-12 px-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none"
+                            />
+                        </div>
+                        
+                        {/* Email */}
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider ml-1">
+                                {t.emailLabel} *
+                            </label>
+                            <input
+                                required
+                                type="email"
+                                name="email"
+                                placeholder="info@esempio.it"
+                                className="w-full h-12 px-4 bg-gray-50 border border-transparent focus:border-gray-200 focus:bg-white rounded-xl text-sm transition-all outline-none"
+                            />
+                        </div>
+>>>>>>> Stashed changes
                     </div>
 
                     {/* Telefono */}

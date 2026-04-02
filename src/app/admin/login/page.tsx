@@ -14,7 +14,6 @@ const ALLOWED_ADMINS = [
     'emanuele.novara77@gmail.com',
     'stefanovananti@gmail.com',
     'stefano.vananti@gmail.com',
-    'info@zeselection.com',
     'admin@zeselection.com'
 ];
 
