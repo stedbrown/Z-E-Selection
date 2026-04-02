@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ImageGallery } from '@/components/image-gallery';
-import { ShareButton } from '@/components/share-button';
+import { SharePanel } from '@/components/share-panel';
 import { ItemCard } from '@/components/item-card';
 import { ContactForm } from '@/components/contact-form';
 
@@ -180,26 +180,13 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     <div className="text-center py-5 bg-gray-100 text-gray-500 font-medium rounded-xl border border-gray-200 text-sm tracking-wide uppercase">
                                         {t.soldOutMessage}
                                     </div>
-                                    {/* Social Share Row */}
-                                    <div className="grid grid-cols-3 gap-3 w-full">
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${baseUrl}/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                            <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
-                                            <span className="hidden sm:inline">Facebook</span>
-                                        </a>
-                                        <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                            <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
-                                            <span className="hidden sm:inline">Instagram</span>
-                                        </a>
-                                        <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
-                                            <ShareButton 
-                                                title={title}
-                                                text={description}
-                                                url={`${baseUrl}/item/${typedItem.id}`}
-                                                label={t.share}
-                                                copiedLabel=""
-                                            />
-                                        </div>
-                                    </div>
+                                    {/* Social Share */}
+                                    <SharePanel
+                                        title={title}
+                                        description={description}
+                                        url={`${baseUrl}/item/${typedItem.id}`}
+                                        lang={lang}
+                                    />
                                 </div>
                             ) : (
                                 <div className="flex flex-col gap-8 w-full">
@@ -226,26 +213,13 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                                     {/* Detailed Email Contact Form */}
                                     <ContactForm itemId={typedItem.id} t={t} />
                                     
-                                    {/* Social Share Row */}
-                                    <div className="grid grid-cols-3 gap-3 w-full">
-                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${baseUrl}/item/${typedItem.id}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                            <Facebook className="w-4 h-4 text-[#1877F2] shrink-0" />
-                                            <span className="hidden sm:inline">Facebook</span>
-                                        </a>
-                                        <a href="https://instagram.com/zeselection" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-[54px] bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 border border-gray-200 rounded-xl transition-all shadow-sm font-medium gap-2 text-sm">
-                                            <Instagram className="w-4 h-4 text-[#E1306C] shrink-0" />
-                                            <span className="hidden sm:inline">Instagram</span>
-                                        </a>
-                                        <div className="[&>button]:!w-full [&>button]:!h-[54px] [&>button]:!px-2 [&>button]:!py-0">
-                                            <ShareButton 
-                                                title={title}
-                                                text={description}
-                                                url={`${baseUrl}/item/${typedItem.id}`}
-                                                label={t.share}
-                                                copiedLabel=""
-                                            />
-                                        </div>
-                                    </div>
+                                    {/* Social Share */}
+                                    <SharePanel
+                                        title={title}
+                                        description={description}
+                                        url={`${baseUrl}/item/${typedItem.id}`}
+                                        lang={lang}
+                                    />
                                 </div>
                             )}
 
